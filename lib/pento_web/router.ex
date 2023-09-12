@@ -89,4 +89,13 @@ defmodule PentoWeb.Router do
     get "/users/confirm/:token", UserConfirmationController, :edit
     post "/users/confirm/:token", UserConfirmationController, :update
   end
+
+  scope "/", PentoWeb do
+    pipe_through [:browser, :require_authenticated_admin]
+
+    live_session :default, root_layout: {PentoWeb.LayoutView, "admin.html"} do
+      live "/game-sales", Admin.GameSalesLive
+      live "/survey-results", Admin.SurveyResultsLive
+    end
+  end
 end

@@ -8,12 +8,14 @@ defmodule Pento.Application do
   @impl true
   def start(_type, _args) do
     children = [
-      # Start the Ecto repository
-      Pento.Repo,
       # Start the Telemetry supervisor
       PentoWeb.Telemetry,
+      # Start the Ecto repository
+      Pento.Repo,
       # Start the PubSub system
       {Phoenix.PubSub, name: Pento.PubSub},
+      # Start Finch
+      {Finch, name: Pento.Finch},
       # Start the Endpoint (http/https)
       PentoWeb.Endpoint
       # Start a worker by calling: Pento.Worker.start_link(arg)

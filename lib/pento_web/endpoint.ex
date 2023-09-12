@@ -7,7 +7,8 @@ defmodule PentoWeb.Endpoint do
   @session_options [
     store: :cookie,
     key: "_pento_key",
-    signing_salt: "y9N39UAg"
+    signing_salt: "f5zU6tow",
+    same_site: "Lax"
   ]
 
   socket "/live", Phoenix.LiveView.Socket, websocket: [connect_info: [session: @session_options]]
@@ -20,7 +21,7 @@ defmodule PentoWeb.Endpoint do
     at: "/",
     from: :pento,
     gzip: false,
-    only: ~w(assets fonts images favicon.ico robots.txt)
+    only: PentoWeb.static_paths()
 
   # Code reloading can be explicitly enabled under the
   # :code_reloader configuration of your endpoint.

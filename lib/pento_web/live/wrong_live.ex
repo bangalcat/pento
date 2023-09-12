@@ -1,9 +1,15 @@
 defmodule PentoWeb.WrongLive do
   use PentoWeb, :live_view
 
-  def mount(_params, _sessions, socket) do
+  def mount(_params, session, socket) do
     {:ok,
-     assign(socket, score: 0, message: "Make a guess:", number: random_number(), is_win: false)}
+     assign(socket,
+       score: 0,
+       message: "Make a guess:",
+       number: random_number(),
+       is_win: false,
+       session_id: session["live_socket_id"]
+     )}
   end
 
   def handle_params(%{"restart" => "true"}, _uri, socket) do
@@ -41,6 +47,11 @@ defmodule PentoWeb.WrongLive do
         restart
       </.link>
     </div>
+    <br />
+    <pre>
+      <%= @current_user.email %>
+      <%= @session_id %>
+    </pre>
     """
   end
 

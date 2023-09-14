@@ -8,6 +8,7 @@ defmodule Pento.Accounts.User do
     field :hashed_password, :string, redact: true
     field :confirmed_at, :naive_datetime
 
+    field :username, :string
     timestamps()
   end
 
@@ -36,9 +37,16 @@ defmodule Pento.Accounts.User do
   """
   def registration_changeset(user, attrs, opts \\ []) do
     user
-    |> cast(attrs, [:email, :password])
+    |> cast(attrs, [:email, :password, :username])
     |> validate_email(opts)
     |> validate_password(opts)
+    |> validate_username()
+  end
+
+  defp validate_username(changeset) do
+    changeset
+    |> validate_required([:username])
+    |> validate_length(:username, max: 20)
   end
 
   defp validate_email(changeset, opts) do
@@ -77,6 +85,7 @@ defmodule Pento.Accounts.User do
     end
   end
 
+  # NOTE: impure한 함수가 아닌가?
   defp maybe_validate_unique_email(changeset, opts) do
     if Keyword.get(opts, :validate_email, true) do
       changeset
@@ -85,6 +94,11 @@ defmodule Pento.Accounts.User do
     else
       changeset
     end
+  end
+
+  def info_changeset(user, attrs) do
+    user
+    |> username_changeset(attrs)
   end
 
   @doc """
@@ -99,6 +113,16 @@ defmodule Pento.Accounts.User do
     |> case do
       %{changes: %{email: _}} = changeset -> changeset
       %{} = changeset -> add_error(changeset, :email, "did not change")
+    end
+  end
+
+  def username_changeset(user, attrs) do
+    user
+    |> cast(attrs, [:username])
+    |> validate_username()
+    |> case do
+      %{changes: %{username: _}} = changeset -> changeset
+      %{} = changeset -> add_error(changeset, :username, "did not change")
     end
   end
 

@@ -35,6 +35,19 @@ defmodule PentoWeb.UserSettingsLive do
       </div>
       <div>
         <.simple_form
+          for={@info_form}
+          id="info_form"
+          phx-submit="update_info"
+          phx-change="validate_info"
+        >
+          <.input field={@info_form[:username]} type="text" label="Username" required />
+          <:actions>
+            <.button phx-disable-with="Changing...">Change Personal Info</.button>
+          </:actions>
+        </.simple_form>
+      </div>
+      <div>
+        <.simple_form
           for={@password_form}
           id="password_form"
           action={~p"/users/log_in?_action=password_updated"}
@@ -90,6 +103,7 @@ defmodule PentoWeb.UserSettingsLive do
     user = socket.assigns.current_user
     email_changeset = Accounts.change_user_email(user)
     password_changeset = Accounts.change_user_password(user)
+    info_changeset = Accounts.change_user_info(user)
 
     socket =
       socket
@@ -97,6 +111,7 @@ defmodule PentoWeb.UserSettingsLive do
       |> assign(:email_form_current_password, nil)
       |> assign(:current_email, user.email)
       |> assign(:email_form, to_form(email_changeset))
+      |> assign(:info_form, to_form(info_changeset))
       |> assign(:password_form, to_form(password_changeset))
       |> assign(:trigger_submit, false)
 
@@ -132,6 +147,34 @@ defmodule PentoWeb.UserSettingsLive do
 
       {:error, changeset} ->
         {:noreply, assign(socket, :email_form, to_form(Map.put(changeset, :action, :insert)))}
+    end
+  end
+
+  def handle_event("validate_info", params, socket) do
+    %{"user" => user_params} = params
+
+    info_form =
+      socket.assigns.current_user
+      |> Accounts.change_user_info(user_params)
+      |> Map.put(:action, :validate)
+      |> to_form()
+
+    {:noreply, assign(socket, info_form: info_form)}
+  end
+
+  def handle_event("update_info", params, socket) do
+    %{"user" => user_params} = params
+
+    case Accounts.update_user_info(socket.assigns.current_user, user_params) do
+      {:ok, user} ->
+        info_form = user |> Accounts.change_user_info(user_params) |> to_form()
+        socket = assign(socket, info_form: info_form, current_user: user)
+        socket = put_flash(socket, :info, "User info has been successfully updated")
+        # socket = push_patch(socket, to: "/")
+        {:noreply, socket}
+
+      {:error, changeset} ->
+        {:noreply, assign(socket, info_form: to_form(changeset))}
     end
   end
 

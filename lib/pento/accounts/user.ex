@@ -46,7 +46,7 @@ defmodule Pento.Accounts.User do
   defp validate_username(changeset) do
     changeset
     |> validate_required([:username])
-    |> validate_length(:username, max: 20)
+    |> validate_length(:username, max: 30)
   end
 
   defp validate_email(changeset, opts) do

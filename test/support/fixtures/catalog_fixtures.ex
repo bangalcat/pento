@@ -25,4 +25,20 @@ defmodule Pento.CatalogFixtures do
 
     product
   end
+
+  @doc """
+  Generate a faq.
+  """
+  def faq_fixture(attrs \\ %{}) do
+    {:ok, faq} =
+      attrs
+      |> Enum.into(%{
+        question: "some question",
+        answer: "some answer",
+        vote: 42
+      })
+      |> Pento.Catalog.create_faq()
+
+    faq
+  end
 end

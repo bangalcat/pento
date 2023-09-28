@@ -1,0 +1,46 @@
+<.header>
+  Listing Faqs
+  <:actions>
+    <.link patch={~p"/faqs/new"}>
+      <.button>New Faq</.button>
+    </.link>
+  </:actions>
+</.header>
+
+<.table
+  id="faqs"
+  rows={@streams.faqs}
+  row_click={fn {_id, faq} -> JS.navigate(~p"/faqs/#{faq}") end}
+>
+  <:col :let={{_id, faq}} label="Question"><%= faq.question %></:col>
+  <:col :let={{_id, faq}} label="Answer"><%= faq.answer %></:col>
+  <:col :let={{_id, faq}} label="Vote"><%= faq.vote %></:col>
+  <:action :let={{_id, faq}}>
+    <div class="sr-only">
+      <.link navigate={~p"/faqs/#{faq}"}>Show</.link>
+    </div>
+    <.link patch={~p"/faqs/#{faq}/edit"}>Edit</.link>
+  </:action>
+  <:action :let={{id, faq}}>
+    <.link
+      phx-click={JS.push("delete", value: %{id: faq.id}) |> hide("##{id}")}
+      data-confirm="Are you sure?"
+    >
+      Delete
+    </.link>
+  </:action>
+  <:action :let={{_id, faq}}>
+    <.link phx-click={JS.push("upvote", value: %{id: faq.id})}>Up Vote</.link>
+  </:action>
+</.table>
+
+<.modal :if={@live_action in [:new, :edit]} id="faq-modal" show on_cancel={JS.patch(~p"/faqs")}>
+  <.live_component
+    module={PentoWeb.FaqLive.FormComponent}
+    id={@faq.id || :new}
+    title={@page_title}
+    action={@live_action}
+    faq={@faq}
+    patch={~p"/faqs"}
+  />
+</.modal>

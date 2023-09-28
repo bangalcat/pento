@@ -1,0 +1,28 @@
+<.header>
+  Faq <%= @faq.id %>
+  <:subtitle>This is a faq record from your database.</:subtitle>
+  <:actions>
+    <.link patch={~p"/faqs/#{@faq}/show/edit"} phx-click={JS.push_focus()}>
+      <.button>Edit faq</.button>
+    </.link>
+  </:actions>
+</.header>
+
+<.list>
+  <:item title="Question"><%= @faq.question %></:item>
+  <:item title="Answer"><%= @faq.answer %></:item>
+  <:item title="Vote"><%= @faq.vote %></:item>
+</.list>
+
+<.back navigate={~p"/faqs"}>Back to faqs</.back>
+
+<.modal :if={@live_action == :edit} id="faq-modal" show on_cancel={JS.patch(~p"/faqs/#{@faq}")}>
+  <.live_component
+    module={PentoWeb.FaqLive.FormComponent}
+    id={@faq.id}
+    title={@page_title}
+    action={@live_action}
+    faq={@faq}
+    patch={~p"/faqs/#{@faq}"}
+  />
+</.modal>

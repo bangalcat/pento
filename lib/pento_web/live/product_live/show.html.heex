@@ -15,7 +15,7 @@
   <:item title="Sku"><%= @product.sku %></:item>
 </.list>
 <div>
-  <img alt="product image" width="200" src={@product.image_upload} />
+  <img :if={@product.image_upload} alt="product image" width="200" src={@product.image_upload} />
 </div>
 
 <.back navigate={~p"/products"}>Back to products</.back>

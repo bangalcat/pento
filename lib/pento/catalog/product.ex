@@ -1,6 +1,7 @@
 defmodule Pento.Catalog.Product do
   use Ecto.Schema
   import Ecto.Changeset
+  import Ecto.Query
 
   schema "products" do
     field :name, :string
@@ -26,5 +27,9 @@ defmodule Pento.Catalog.Product do
     |> cast(attrs, [:unit_price])
     |> validate_required([:unit_price])
     |> validate_number(:unit_price, greater_than: 0.0, less_than: product.unit_price)
+  end
+
+  def query_by_sku(sku) do
+    from q in __MODULE__, where: q.sku == ^sku
   end
 end

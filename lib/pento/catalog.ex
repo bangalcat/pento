@@ -4,6 +4,7 @@ defmodule Pento.Catalog do
   """
 
   import Ecto.Query, warn: false
+  alias Pento.Catalog.Search
   alias Pento.Repo
 
   alias Pento.Catalog.Product
@@ -208,5 +209,21 @@ defmodule Pento.Catalog do
   """
   def change_faq(%Faq{} = faq, attrs \\ %{}) do
     Faq.changeset(faq, attrs)
+  end
+
+  def change_search(%Search{} = search, attrs \\ %{}) do
+    Search.changeset(search, attrs)
+  end
+
+  def apply_search(search, attrs) do
+    search
+    |> change_search(attrs)
+    |> Ecto.Changeset.apply_action(:update)
+  end
+
+  def search_product(%Search{} = search) do
+    search.sku
+    |> Product.query_by_sku()
+    |> Repo.all()
   end
 end

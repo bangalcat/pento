@@ -1,0 +1,24 @@
+<.header>
+  Search Your Product by SKU
+</.header>
+
+<div>
+  <.simple_form for={@form} id="search-form" phx-change="validate" phx-submit="search">
+    <.input field={@form[:sku]} type="text" label="SKU" />
+
+    <:actions>
+      <.button phx-disable-with="Searching...">Search</.button>
+    </:actions>
+  </.simple_form>
+</div>
+
+<.table
+  id="products"
+  rows={@streams.products}
+  row_click={fn {_id, product} -> JS.navigate(~p"/products/#{product}") end}
+>
+  <:col :let={{_id, product}} label="Name"><%= product.name %></:col>
+  <:col :let={{_id, product}} label="Description"><%= product.description %></:col>
+  <:col :let={{_id, product}} label="Unit price"><%= product.unit_price %></:col>
+  <:col :let={{_id, product}} label="Sku"><%= product.sku %></:col>
+</.table>

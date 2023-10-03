@@ -81,12 +81,12 @@ defmodule Pento.CatalogTest do
     end
 
     test "create_faq/1 with valid data creates a faq" do
-      valid_attrs = %{question: "some question", answer: "some answer", vote: 42}
+      valid_attrs = %{question: "some question", answer: "some answer"}
 
       assert {:ok, %Faq{} = faq} = Catalog.create_faq(valid_attrs)
       assert faq.question == "some question"
       assert faq.answer == "some answer"
-      assert faq.vote == 42
+      assert faq.vote == 0
     end
 
     test "create_faq/1 with invalid data returns error changeset" do

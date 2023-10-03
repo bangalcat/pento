@@ -4,9 +4,9 @@ defmodule PentoWeb.FaqLiveTest do
   import Phoenix.LiveViewTest
   import Pento.CatalogFixtures
 
-  @create_attrs %{question: "some question", answer: "some answer", vote: 42}
-  @update_attrs %{question: "some updated question", answer: "some updated answer", vote: 43}
-  @invalid_attrs %{question: nil, answer: nil, vote: nil}
+  @create_attrs %{question: "some question", answer: "some answer"}
+  @update_attrs %{question: "some updated question", answer: "some updated answer"}
+  @invalid_attrs %{question: nil, answer: nil}
 
   defp create_faq(_) do
     faq = faq_fixture()
@@ -14,7 +14,7 @@ defmodule PentoWeb.FaqLiveTest do
   end
 
   describe "Index" do
-    setup [:create_faq]
+    setup [:create_faq, :register_and_log_in_user]
 
     test "lists all faqs", %{conn: conn, faq: faq} do
       {:ok, _index_live, html} = live(conn, ~p"/faqs")
@@ -78,7 +78,7 @@ defmodule PentoWeb.FaqLiveTest do
   end
 
   describe "Show" do
-    setup [:create_faq]
+    setup [:create_faq, :register_and_log_in_user]
 
     test "displays faq", %{conn: conn, faq: faq} do
       {:ok, _show_live, html} = live(conn, ~p"/faqs/#{faq}")

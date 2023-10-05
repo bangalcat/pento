@@ -12,6 +12,18 @@
       label="Year of Birth"
       options={Enum.reverse(1920..2023)}
     />
+    <.input
+      field={@form[:education]}
+      type="select"
+      label="Education"
+      options={[
+        "high school",
+        "bachelor's degree",
+        "graduate degree",
+        "other",
+        "prefer not to say"
+      ]}
+    />
 
     <:actions>
       <.button phx-disable-with="Saving...">Save</.button>

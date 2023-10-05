@@ -13,12 +13,15 @@ defmodule PentoWeb.DemographicLive.Show do
       <h2 class="font-medium text-2xl">
         Demographic <%= raw("&#x2713;") %>
       </h2>
-      <CoreComponents.table rows={[@demographic]} id={to_string(@demographic.id)}>
+      <CoreComponents.table rows={[@demographic]} id={to_string(@demographic.id)} first_col_class="">
         <:col :let={demographic} label="Gender">
           <%= demographic.gender %>
         </:col>
         <:col :let={demographic} label="Year of Birth">
           <%= demographic.year_of_birth %>
+        </:col>
+        <:col :let={demographic} label="Education">
+          <%= demographic.education %>
         </:col>
       </CoreComponents.table>
     </div>

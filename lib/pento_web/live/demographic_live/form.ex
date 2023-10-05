@@ -7,6 +7,8 @@ defmodule PentoWeb.DemographicLive.Form do
     {:ok, socket |> assign(assigns) |> assign_demographic() |> clear_form()}
   end
 
+  def assign_demographic(%{assigns: %{demographic: _}} = socket), do: socket
+
   def assign_demographic(%{assigns: %{current_user: current_user}} = socket) do
     assign(socket, :demographic, %Demographic{user_id: current_user.id})
   end
@@ -36,6 +38,21 @@ defmodule PentoWeb.DemographicLive.Form do
   end
 
   # our reducer
+  defp save_demographic(
+         %{assigns: %{demographic: %{id: id} = demographic}} = socket,
+         demographic_params
+       )
+       when id != nil do
+    case Survey.update_demographic(demographic, demographic_params) do
+      {:ok, demographic} ->
+        send(self(), {:updated_demographic, demographic})
+        socket
+
+      {:error, %Ecto.Changeset{} = changeset} ->
+        assign_form(socket, changeset)
+    end
+  end
+
   defp save_demographic(socket, demographic_params) do
     case Survey.create_demographic(demographic_params) do
       {:ok, demographic} ->

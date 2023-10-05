@@ -3,8 +3,9 @@
   <Component.hero content="Survey">
     Please fill out our survey
   </Component.hero>
-  <%= if @demographic do %>
+  <%= if @demographic && not @demographic_editable do %>
     <DemographicLive.Show.details demographic={@demographic} />
+    <.button phx-click="edit_demographic" class="py-1">Edit</.button>
     <hr />
     <br />
     <RatingLive.Index.product_list products={@products} current_user={@current_user} />
@@ -13,6 +14,7 @@
       module={DemographicLive.Form}
       id="demographic-form"
       current_user={@current_user}
+      demographic={@demographic}
     />
   <% end %>
 </section>

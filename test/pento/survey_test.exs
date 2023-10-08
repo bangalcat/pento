@@ -21,7 +21,12 @@ defmodule Pento.SurveyTest do
     end
 
     test "create_demographic/1 with valid data creates a demographic" do
-      valid_attrs = %{gender: "female", year_of_birth: 2000, user_id: user_fixture().id}
+      valid_attrs = %{
+        gender: "female",
+        year_of_birth: 2000,
+        user_id: user_fixture().id,
+        education: "high school"
+      }
 
       assert {:ok, %Demographic{} = demographic} = Survey.create_demographic(valid_attrs)
       assert demographic.gender == "female"

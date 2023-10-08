@@ -1,12 +1,7 @@
 <section class="ml-8">
   <h2 class="font-light text-2xl">Survey Results</h2>
 
-  <.table id="products-with-ratings" rows={@products_with_average_ratings}>
-    <:col :let={{product, _}} label="Product">
-      <%= product %>
-    </:col>
-    <:col :let={{_product, rating}} label="Ratings">
-      <%= rating %>
-    </:col>
-  </.table>
+  <div id="survey-results-chart">
+    <%= @chart_svg %>
+  </div>
 </section>

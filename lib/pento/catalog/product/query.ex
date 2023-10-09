@@ -89,12 +89,26 @@ defmodule Pento.Catalog.Product.Query do
     |> where([p, r, u, d], d.year_of_birth <= ^birth_year_max)
   end
 
-  defp apply_age_group_filter(query, _filter, _now) do
+  defp apply_age_group_filter(query, "all", _now) do
     query
   end
 
   def with_zero_ratings(query \\ base()) do
     query
     |> select([p], {p.name, 0})
+  end
+
+  def filter_by_gender(query \\ base(), filter) do
+    query
+    |> apply_gender_filter(filter)
+  end
+
+  defp apply_gender_filter(query, "all") do
+    query
+  end
+
+  defp apply_gender_filter(query, gender) do
+    query
+    |> where([p, r, u, d], d.gender == ^gender)
   end
 end

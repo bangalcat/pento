@@ -2,6 +2,19 @@ defmodule PentoWeb.Presence do
   use Phoenix.Presence, otp_app: :pento, pubsub_server: Pento.PubSub
 
   @user_activity_topic "user_activity"
+  @survey_user_topic "survey_user"
+
+  def track_survey_user(pid, user_email) do
+    track(pid, @survey_user_topic, "survey_count", %{users: [%{email: user_email}]})
+  end
+
+  def survey_count() do
+    list(@survey_user_topic)
+    |> get_in(["survey_count", :metas, Access.all(), :users])
+    |> then(&(&1 || []))
+    |> Enum.uniq()
+    |> Enum.count()
+  end
 
   def track_user(pid, product, user_email) do
     track(pid, @user_activity_topic, product.name, %{users: [%{email: user_email}]})

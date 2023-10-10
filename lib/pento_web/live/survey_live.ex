@@ -4,6 +4,7 @@ defmodule PentoWeb.SurveyLive do
   alias PentoWeb.DemographicLive
   alias PentoWeb.RatingLive
   alias PentoWeb.Endpoint
+  alias PentoWeb.Presence
 
   alias Pento.Survey
   alias Pento.Catalog
@@ -13,6 +14,8 @@ defmodule PentoWeb.SurveyLive do
   @survey_results_topic "survey_results"
 
   def mount(_params, _session, socket) do
+    maybe_track_user(socket)
+
     {:ok,
      socket
      |> assign_demographic()
@@ -73,4 +76,12 @@ defmodule PentoWeb.SurveyLive do
   defp list_products(user) do
     Catalog.list_products_with_user_rating(user)
   end
+
+  def maybe_track_user(%{assigns: %{current_user: current_user}} = socket) do
+    if connected?(socket) do
+      Presence.track_survey_user(self(), current_user.email)
+    end
+  end
+
+  def maybe_track_user(_product, _socket), do: nil
 end

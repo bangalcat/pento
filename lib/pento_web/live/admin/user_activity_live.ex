@@ -1,6 +1,7 @@
 defmodule PentoWeb.Admin.UserActivityLive do
-  alias PentoWeb.Presence
   use PentoWeb, :live_component
+
+  alias PentoWeb.Presence
 
   def update(assigns, socket) do
     {:ok, assign(socket, assigns) |> assign_user_acitivity()}

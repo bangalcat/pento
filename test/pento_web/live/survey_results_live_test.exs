@@ -1,8 +1,11 @@
 defmodule PentoWeb.SurveyResultsLiveTest do
   use PentoWeb.ConnCase
-  alias PentoWeb.Admin.SurveyResultsLive
 
-  alias Pento.{Accounts, Survey, Catalog}
+  import Pento.AccountsFixtures
+  import Pento.CatalogFixtures
+  import Pento.SurveyFixtures
+
+  alias PentoWeb.Admin.SurveyResultsLive
 
   @create_product_attrs %{
     description: "test description",
@@ -38,7 +41,7 @@ defmodule PentoWeb.SurveyResultsLiveTest do
     setup %{user: user} do
       create_demographic(user)
       user2 = user_fixture(@create_user2_attrs)
-      demographic_fixture(user2, @create_demographic2_attrs)
+      demographic_fixture(Map.merge(@create_demographic2_attrs, %{user_id: user2.id}))
       [user2: user2]
     end
 
@@ -89,50 +92,23 @@ defmodule PentoWeb.SurveyResultsLiveTest do
     %{socket | assigns: Map.merge(socket.assigns, Map.new([{key, value}]))}
   end
 
-  defp product_fixture() do
-    {:ok, product} = Catalog.create_product(@create_product_attrs)
-    product
-  end
-
-  defp user_fixture(attrs \\ @create_user_attrs) do
-    {:ok, user} = Accounts.register_user(attrs)
-    user
-  end
-
-  defp demographic_fixture(user, attrs \\ @create_demographic_attrs) do
-    attrs = attrs |> Map.put(:user_id, user.id)
-    {:ok, demographic} = Survey.create_demographic(attrs)
-    demographic
-  end
-
-  defp rating_fixture(stars, user, product) do
-    {:ok, rating} =
-      Survey.create_rating(%{
-        stars: stars,
-        user_id: user.id,
-        product_id: product.id
-      })
-
-    rating
-  end
-
   defp create_product(_) do
-    product = product_fixture()
+    product = product_fixture(@create_product_attrs)
     %{product: product}
   end
 
   defp create_user(_) do
-    user = user_fixture()
+    user = user_fixture(@create_user_attrs)
     %{user: user}
   end
 
   defp create_rating(stars, user, product) do
-    rating = rating_fixture(stars, user, product)
+    rating = rating_fixture(%{stars: stars, user_id: user.id, product_id: product.id})
     %{rating: rating}
   end
 
   defp create_demographic(user) do
-    demographic = demographic_fixture(user)
+    demographic = demographic_fixture(Map.merge(@create_demographic_attrs, %{user_id: user.id}))
     %{demographic: demographic}
   end
 

@@ -8,8 +8,8 @@ defmodule PentoWeb.Admin.SurveyResultsLive do
     {:ok,
      socket
      |> assign(assigns)
-     |> assign_gender_filter("all")
-     |> assign_age_group_filter("all")
+     |> assign_new(:gender_filter, fn -> "all" end)
+     |> assign_new(:age_group_filter, fn -> "all" end)
      |> assign_products_with_average_ratings()
      |> assign_dataset()
      |> assign_chart()

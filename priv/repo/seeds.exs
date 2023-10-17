@@ -21,7 +21,8 @@ products = [
   %{
     name: "Tic-tac-toe",
     description: "The game of Xs and Os",
-    sku: 11_121_314, unit_price: 3.00
+    sku: 11_121_314,
+    unit_price: 3.00
   },
   %{
     name: "Table Tennis",
@@ -31,6 +32,6 @@ products = [
   }
 ]
 
-Enum.each(products, fn product -> 
+Enum.each(products, fn product ->
   Catalog.create_product(product)
 end)

@@ -1,6 +1,31 @@
 defmodule Pento.Game.Point do
+  @doc """
+  ## Examples
+
+      iex> Point.new(1, 2)
+      {1, 2}
+
+  """
   def new(x, y) when is_integer(x) and is_integer(y), do: {x, y}
 
+  @doc """
+  ## Examples
+
+      iex> Point.prepare({1, 2}, 0, false, {0, 0})
+      {-2, -1}
+
+      iex> Point.prepare({1, 2}, 90, false, {0, 0})
+      {-1, 2}
+
+      iex> Point.prepare({1, 2}, 180, false, {0, 0})
+      {2, 1}
+
+      iex> Point.prepare({1, 2}, 270, false, {0, 0})
+      {1, -2}
+
+      iex> Point.prepare({1, 2}, 0, true, {0, 0})
+      {2, -1}
+  """
   def prepare(point, rotation, reflected, location) do
     point
     |> rotate(rotation)

@@ -11,6 +11,19 @@ defmodule Pento.Game.Board do
     ~w[default wide widest medium tiny]a
   end
 
+  @doc """
+
+  ## Examples
+
+      iex> Board.new(:small, [{1, 1}, {1, 2}, {1, 3}])
+      %Board{
+        active_pento: nil,
+        completed_pentos: [],
+        palette: [:u, :v, :p],
+        points: [{1, 1}, {1, 2}, {1, 3}]
+      }
+
+  """
   def new(palette, points) do
     %__MODULE__{
       palette: palette(palette),
@@ -24,8 +37,17 @@ defmodule Pento.Game.Board do
   def new(:medium), do: new(:all, rect(12, 5))
   def new(:default), do: new(:all, rect(10, 6))
 
+  def new(:skewed_widest), do: new(:all, skewed_rect(20, 3))
+  def new(:skewed_wide), do: new(:all, skewed_rect(15, 4))
+  def new(:skewed_medium), do: new(:all, skewed_rect(12, 5))
+  def new(:skewed_default), do: new(:all, skewed_rect(10, 6))
+
   defp rect(x, y) do
     for x <- 1..x, y <- 1..y, do: {x, y}
+  end
+
+  defp skewed_rect(x, y) do
+    for x <- 1..x, y <- 1..y, do: {x + y - 1, y}
   end
 
   defp palette(:all), do: [:i, :l, :y, :n, :p, :w, :u, :v, :s, :f, :x, :t]

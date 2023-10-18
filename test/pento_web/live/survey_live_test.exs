@@ -18,7 +18,7 @@ defmodule PentoWeb.SurveyLiveTest do
     test "change demographic form and submit", %{conn: conn} do
       {:ok, liveview, _html} = live(conn, ~p"/survey")
 
-      open_browser(liveview)
+      # open_browser(liveview)
 
       assert liveview
              |> form("#demographic-form", demographic: %{:gender => "prefer not to say"})

@@ -92,4 +92,29 @@ defmodule PentoWeb.GameLive.Component do
     y = div(i, 6) * 5 + 3
     {x, y}
   end
+
+  attr :view_box, :string, required: true
+  slot :inner_block
+
+  def control_pane(assigns) do
+    ~H"""
+    <svg viewBox={@view_box}>
+      <defs>
+        <polygon id="triangle" points="6.25 1.875, 12.5 12.5, 0 12.5" />
+      </defs>
+      <%= render_slot(@inner_block) %>
+    </svg>
+    """
+  end
+
+  attr :x, :integer, required: true
+  attr :y, :integer, required: true
+  attr :rotate, :integer, default: 0
+  attr :fill, :string, required: true
+
+  def triangle(assigns) do
+    ~H"""
+    <use x={@x} y={@y} transform={"rotate(#{@rotate} 100 100)"} href="#triangle" fill={@fill} />
+    """
+  end
 end

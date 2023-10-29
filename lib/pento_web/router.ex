@@ -75,6 +75,7 @@ defmodule PentoWeb.Router do
       live "/search", SearchLive
       live "/survey", SurveyLive, :index
       live "/game/:puzzle", GameLive
+      live "play", GameLive.Picker
 
       live "/products", ProductLive.Index, :index
       live "/products/new", ProductLive.Index, :new

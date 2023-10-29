@@ -40,4 +40,30 @@ defmodule Pento.Game do
       {:error, @messages[:illegal_drop]}
     end
   end
+
+  def pick(board, shape_name) do
+    Board.pick(board, shape_name)
+  end
+
+  def active_board?(board, shape_name) do
+    Board.active?(board, shape_name)
+  end
+
+  defdelegate puzzles, to: Board
+
+  defdelegate new_board(name), to: Board, as: :new
+
+  def board_to_shapes(board) do
+    Board.to_shapes(board)
+  end
+
+  def board_to_shape(board) do
+    Board.to_shape(board)
+  end
+
+  def pentomino_to_shape(pentomino) do
+    Pentomino.to_shape(pentomino)
+  end
+
+  defdelegate new_pentomino(fields \\ []), to: Pentomino, as: :new
 end

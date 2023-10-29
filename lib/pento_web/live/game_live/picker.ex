@@ -1,17 +1,17 @@
 defmodule PentoWeb.GameLive.Picker do
   use PentoWeb, :live_view
 
-  alias Pento.Game.Board
-
   import PentoWeb.GameLive.Colors
   import PentoWeb.GameLive.Component
+
+  alias Pento.Game
 
   def mount(_params, _session, socket) do
     {:ok, assign_boards(socket)}
   end
 
   def assign_boards(socket) do
-    assign(socket, :boards, Board.puzzles() |> Enum.map(&{&1, Board.new(&1)}))
+    assign(socket, :boards, Game.puzzles() |> Enum.map(&{&1, Game.new_board(&1)}))
   end
 
   def render(assigns) do
@@ -51,7 +51,7 @@ defmodule PentoWeb.GameLive.Picker do
     ~H"""
     <div>
       <.canvas view_box={"0 0 400 #{height(@board) * 10 + 25}"}>
-        <.shape points={Board.to_shape(@board).points} fill={color(:purple)} name="board" />
+        <.shape points={Game.board_to_shape(@board).points} fill={color(:purple)} name="board" />
       </.canvas>
     </div>
     """

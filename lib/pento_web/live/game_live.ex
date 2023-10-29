@@ -11,7 +11,7 @@ defmodule PentoWeb.GameLive do
 
   def render(assigns) do
     ~H"""
-    <section class="container">
+    <section id="game-container" class="container">
       <div class="grid grid-cols-2">
         <div>
           <h1 class="font-heavy text-3xl">Welcome to Pento!</h1>

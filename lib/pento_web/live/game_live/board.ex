@@ -1,10 +1,10 @@
 defmodule PentoWeb.GameLive.Board do
   use PentoWeb, :live_component
 
-  alias Pento.Game
-  alias Pento.Game.Board
   import PentoWeb.GameLive.Colors
   import PentoWeb.GameLive.Component
+
+  alias Pento.Game
 
   def update(%{puzzle: puzzle, id: id}, socket) do
     {:ok, socket |> assign_params(id, puzzle) |> assign_board() |> assign_shapes()}
@@ -12,12 +12,12 @@ defmodule PentoWeb.GameLive.Board do
 
   def render(assigns) do
     ~H"""
-    <div id={@id} phx-window-keydown="key" phx-target={@myself}>
-      <.canvas view_box="0 0 200 140">
+    <div id={@id} phx-window-keydown="key" phx-target={@myself} phx-hook="PreventSpaceScroll">
+      <.canvas view_box="0 0 200 120">
         <%= for shape <- @shapes do %>
           <.shape
             points={shape.points}
-            fill={color(shape.color, Board.active?(@board, shape.name), false)}
+            fill={color(shape.color, Game.active_board?(@board, shape.name), false)}
             name={shape.name}
           />
         <% end %>
@@ -36,18 +36,18 @@ defmodule PentoWeb.GameLive.Board do
   end
 
   def assign_board(%{assigns: %{puzzle: puzzle}} = socket) do
-    _puzzles = Board.puzzles()
+    _puzzles = Game.puzzles()
 
     board =
       puzzle
       |> String.to_existing_atom()
-      |> Board.new()
+      |> Game.new_board()
 
     assign(socket, board: board)
   end
 
   def assign_shapes(%{assigns: %{board: board}} = socket) do
-    shapes = board |> Board.to_shapes()
+    shapes = board |> Game.board_to_shapes()
     assign(socket, shapes: shapes)
   end
 
@@ -89,6 +89,6 @@ defmodule PentoWeb.GameLive.Board do
 
   defp pick(socket, name) do
     shape_name = String.to_existing_atom(name)
-    update(socket, :board, &Board.pick(&1, shape_name))
+    update(socket, :board, &Game.pick(&1, shape_name))
   end
 end

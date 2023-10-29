@@ -1,7 +1,8 @@
 defmodule PentoWeb.GameLive.Component do
   use Phoenix.Component
-  alias Pento.Game.Pentomino
   import PentoWeb.GameLive.Colors
+
+  alias Pento.Game
 
   @width 10
 
@@ -83,8 +84,8 @@ defmodule PentoWeb.GameLive.Component do
   end
 
   defp place_pento({name, i}) do
-    Pentomino.new(name: name, location: location(i))
-    |> Pentomino.to_shape()
+    Game.new_pentomino(name: name, location: location(i))
+    |> Game.pentomino_to_shape()
   end
 
   defp location(i) do

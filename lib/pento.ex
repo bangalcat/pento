@@ -1,4 +1,8 @@
 defmodule Pento do
+  use Boundary,
+    deps: [Ecto, Ecto.Changeset],
+    exports: [{Accounts, []}, {Catalog, []}, {Game, []}, {Promo, []}, {Survey, []}, Repo]
+
   @moduledoc """
   Pento keeps the contexts that define your domain
   and business logic.

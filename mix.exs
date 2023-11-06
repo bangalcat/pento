@@ -9,7 +9,16 @@ defmodule Pento.MixProject do
       elixirc_paths: elixirc_paths(Mix.env()),
       start_permanent: Mix.env() == :prod,
       aliases: aliases(),
-      deps: deps()
+      deps: deps(),
+      compilers: [:boundary] ++ Mix.compilers(),
+      boundary: [
+        default: [
+          check: [
+            apps: [:phoenix, :ecto],
+            aliases: true
+          ]
+        ]
+      ]
     ]
   end
 
@@ -51,7 +60,9 @@ defmodule Pento.MixProject do
       {:gettext, "~> 0.20"},
       {:jason, "~> 1.2"},
       {:plug_cowboy, "~> 2.5"},
-      {:contex, "~> 0.5"}
+      {:contex, "~> 0.5"},
+      {:boundary, "~> 0.10", runtime: false},
+      {:dialyxir, "~> 1.0", only: :dev, runtime: false}
     ]
   end
 

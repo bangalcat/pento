@@ -2,12 +2,10 @@ defmodule Pento.Catalog do
   @moduledoc """
   The Catalog context.
   """
-
   import Ecto.Query, warn: false
   alias Pento.Catalog.Search
-  alias Pento.Repo
-
   alias Pento.Catalog.Product
+  alias Pento.Repo
 
   @doc """
   Returns the list of products.

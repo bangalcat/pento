@@ -1,4 +1,6 @@
 defmodule PentoWeb do
+  use Boundary, deps: [Phoenix, Ecto.Changeset, Pento], exports: [Telemetry, Endpoint, Presence]
+
   @moduledoc """
   The entrypoint for defining your web interface, such
   as controllers, components, channels, and so on.

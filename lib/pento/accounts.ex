@@ -1,4 +1,6 @@
 defmodule Pento.Accounts do
+  use Boundary, deps: [Pento.{Repo, Mailer}], exports: [User]
+
   @moduledoc """
   The Accounts context.
   """

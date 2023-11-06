@@ -1,4 +1,6 @@
 defmodule Pento.Game do
+  use Boundary
+
   alias Pento.Game.Board
   alias Pento.Game.Pentomino
 

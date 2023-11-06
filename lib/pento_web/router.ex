@@ -60,6 +60,8 @@ defmodule PentoWeb.Router do
     post "/users/log_in", UserSessionController, :create
   end
 
+  ## LiveView routes
+
   scope "/", PentoWeb do
     pipe_through [:browser, :require_authenticated_user]
 
@@ -91,6 +93,15 @@ defmodule PentoWeb.Router do
       live "/faqs/:id", FaqLive.Show, :show
       live "/faqs/:id/show/edit", FaqLive.Show, :edit
     end
+  end
+
+  ## JSON API routes
+
+  scope "/api", PentoWeb do
+    pipe_through [:api]
+
+    resources "/users", UserController, except: [:new, :edit]
+    resources "/products", ProductController, except: [:new, :edit]
   end
 
   scope "/", PentoWeb do

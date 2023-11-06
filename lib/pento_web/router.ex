@@ -15,6 +15,7 @@ defmodule PentoWeb.Router do
 
   pipeline :api do
     plug :accepts, ["json"]
+    plug OpenApiSpex.Plug.PutApiSpec, module: PentoWeb.ApiSpec
   end
 
   scope "/", PentoWeb do
@@ -102,6 +103,18 @@ defmodule PentoWeb.Router do
 
     resources "/users", UserController, except: [:new, :edit]
     resources "/products", ProductController, except: [:new, :edit]
+  end
+
+  scope "/api" do
+    pipe_through [:api]
+
+    get "/openapi", OpenApiSpex.Plug.RenderSpec, []
+  end
+
+  scope "/" do
+    pipe_through [:browser]
+
+    get "/swaggerui", OpenApiSpex.Plug.SwaggerUI, path: "/api/openapi"
   end
 
   scope "/", PentoWeb do

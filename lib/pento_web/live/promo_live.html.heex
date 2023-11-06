@@ -4,7 +4,7 @@
 </.header>
 
 <div>
-  <.simple_form :let={f} for={@form} id="promo-form" phx-change="validate" phx-submit="save">
+  <.simple_form for={@form} id="promo-form" phx-change="validate" phx-submit="save">
     <.input field={@form[:first_name]} type="text" label="First Name" />
     <.input field={@form[:email]} type="email" label="Email" phx-debounce="blur" />
 

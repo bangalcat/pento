@@ -32,6 +32,8 @@ defmodule Pento.Game.Pentomino do
   """
   def new(fields \\ []), do: __struct__(fields)
 
+  def names, do: @names
+
   @doc """
 
   it only allows 0, 90, 270, 360 degrees

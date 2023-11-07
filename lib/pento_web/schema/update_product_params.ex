@@ -2,16 +2,12 @@ defmodule PentoWeb.Schema.UpdateProductParams do
   use OpenApiSpex.Schemax
 
   schema do
-    property :product, product()
-    additional_properties false
-  end
-
-  embedded_schema :product do
+    write_only true
     property :name, :string
     property :description, :string
     property :unit_price, :number
     property :sku, :integer
-    property :image_upload, :string
+    property :image_upload, :string, format: :binary
     additional_properties false
   end
 end

@@ -124,10 +124,9 @@ defmodule PentoWeb.UserControllerTest do
     test "renders errors when not found user", %{conn: conn} do
       {404, _, json} =
         assert_error_sent 404, fn ->
-          conn =
-            conn
-            |> put_req_header("content-type", "application/json")
-            |> put(~p"/api/users/#{9_999_999}", user: @update_attrs)
+          conn
+          |> put_req_header("content-type", "application/json")
+          |> put(~p"/api/users/#{9_999_999}", user: @update_attrs)
         end
 
       result = Jason.decode!(json)

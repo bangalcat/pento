@@ -1,18 +1,13 @@
 defmodule PentoWeb.Schema.CreateProductParams do
   use OpenApiSpex.Schemax
 
+  @required [:name, :description, :unit_price]
   schema do
-    property :product, product()
-    additional_properties false
-  end
-
-  embedded_schema :product do
     property :name, :string
     property :description, :string
     property :unit_price, :number
     property :sku, :integer
-    property :image_upload, :string
+    property :image_upload, :string, format: :binary
     additional_properties false
-    required [:name, :description, :unit_price]
   end
 end

@@ -68,9 +68,11 @@ defmodule PentoWeb.ProductController do
   end
 
   def create(conn, _) do
-    %{product: product_params} = OpenApiSpex.body_params(conn)
+    product_params = OpenApiSpex.body_params(conn)
 
-    with {:ok, %Product{} = product} <- Catalog.create_product(product_params) do
+    with {:ok, path} <- maybe_upload_static_file(product_params.image_upload),
+         product_params = Map.put(product_params, :image_upload, path),
+         {:ok, %Product{} = product} <- Catalog.create_product(product_params) do
       conn
       |> put_status(:created)
       |> put_resp_header("location", ~p"/api/products/#{product}")
@@ -141,10 +143,12 @@ defmodule PentoWeb.ProductController do
   end
 
   def update(conn, %{"id" => id}) do
-    %{product: product_params} = OpenApiSpex.body_params(conn)
+    product_params = OpenApiSpex.body_params(conn)
     product = Catalog.get_product!(id)
 
-    with {:ok, %Product{} = product} <- Catalog.update_product(product, product_params) do
+    with {:ok, path} <- maybe_upload_static_file(product_params.image_upload),
+         product_params = Map.put(product_params, :image_upload, path),
+         {:ok, %Product{} = product} <- Catalog.update_product(product, product_params) do
       render(conn, :show, product: product)
     end
   end
@@ -180,5 +184,16 @@ defmodule PentoWeb.ProductController do
     with {:ok, %Product{}} <- Catalog.delete_product(product) do
       send_resp(conn, :no_content, "")
     end
+  end
+
+  defp maybe_upload_static_file(nil), do: {:ok, nil}
+
+  defp maybe_upload_static_file(%{path: path}) do
+    # Plug in your production image file persistence implementation here!
+    filename = Path.basename(path)
+    dest = Path.join("priv/static/images", filename)
+    File.cp!(path, dest)
+
+    {:ok, ~p"/images/#{filename}"}
   end
 end

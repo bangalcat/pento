@@ -63,7 +63,8 @@ defmodule Pento.MixProject do
       {:contex, "~> 0.5"},
       {:boundary, "~> 0.10", runtime: false},
       {:dialyxir, "~> 1.0", only: :dev, runtime: false},
-      {:open_api_spex, "~> 3.0"}
+      {:open_api_spex, "~> 3.0"},
+      {:open_api_spex_schemax, github: "bangalcat/open_api_spex_schemax", branch: "main"}
     ]
   end
 

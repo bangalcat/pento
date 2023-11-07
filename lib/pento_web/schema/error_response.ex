@@ -11,7 +11,7 @@ defmodule PentoWeb.Schema.ErrorResponse do
         type: :object,
         required: [:code, :message],
         properties: %{
-          code: %Schema{type: :integer},
+          code: %Schema{type: :string},
           message: %Schema{type: :string}
         }
       }

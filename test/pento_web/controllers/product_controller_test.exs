@@ -2,6 +2,7 @@ defmodule PentoWeb.ProductControllerTest do
   use PentoWeb.ConnCase
 
   import Pento.CatalogFixtures
+  import OpenApiSpex.TestAssertions
 
   alias Pento.Catalog.Product
 
@@ -26,32 +27,45 @@ defmodule PentoWeb.ProductControllerTest do
   end
 
   describe "index" do
-    test "lists all products", %{conn: conn} do
+    setup [:create_product]
+
+    test "lists all products", %{conn: conn, product: %{id: id}} do
       conn = get(conn, ~p"/api/products")
-      assert json_response(conn, 200)["data"] == []
+      result = json_response(conn, 200)
+      assert_response_schema result, "ProductListResponse", api_spec()
+      assert [%{"id" => ^id}] = result["data"]
     end
   end
 
   describe "create product" do
     test "renders product when data is valid", %{conn: conn} do
-      conn = post(conn, ~p"/api/products", product: @create_attrs)
+      conn =
+        conn
+        |> post(~p"/api/products", product: @create_attrs)
+
       assert %{"id" => id} = json_response(conn, 201)["data"]
 
       conn = get(conn, ~p"/api/products/#{id}")
 
-      assert %{
-               "id" => ^id,
+      result = json_response(conn, 200)
+
+      assert_response_schema result, "ProductResponse", api_spec()
+
+      assert result["data"] == %{
+               "id" => id,
                "description" => "some description",
                "image_upload" => "some image_upload",
                "name" => "some name",
                "sku" => 42,
                "unit_price" => 120.5
-             } = json_response(conn, 200)["data"]
+             }
     end
 
     test "renders errors when data is invalid", %{conn: conn} do
       conn = post(conn, ~p"/api/products", product: @invalid_attrs)
-      assert json_response(conn, 422)["errors"] != %{}
+      result = json_response(conn, 400)
+      assert_response_schema result, "ErrorResponse", api_spec()
+      assert result["error"] == %{"code" => "invalid_parameter", "message" => "invalid_parameter"}
     end
   end
 
@@ -60,7 +74,9 @@ defmodule PentoWeb.ProductControllerTest do
 
     test "renders product when data is valid", %{conn: conn, product: %Product{id: id} = product} do
       conn = put(conn, ~p"/api/products/#{product}", product: @update_attrs)
-      assert %{"id" => ^id} = json_response(conn, 200)["data"]
+      result = json_response(conn, 200)
+      assert_response_schema result, "ProductResponse", api_spec()
+      assert %{"id" => ^id} = result["data"]
 
       conn = get(conn, ~p"/api/products/#{id}")
 
@@ -76,7 +92,9 @@ defmodule PentoWeb.ProductControllerTest do
 
     test "renders errors when data is invalid", %{conn: conn, product: product} do
       conn = put(conn, ~p"/api/products/#{product}", product: @invalid_attrs)
-      assert json_response(conn, 422)["errors"] != %{}
+      result = json_response(conn, 400)
+      assert_response_schema result, "ErrorResponse", api_spec()
+      assert result["error"] == %{"code" => "invalid_parameter", "message" => "invalid_parameter"}
     end
   end
 

@@ -35,7 +35,9 @@ defmodule PentoWeb.UserController do
       201 => {"User created Response", "application/json", UserResponse}
     }
 
-  def create(conn, %{"user" => user_params}) do
+  def create(conn, _) do
+    %{user: user_params} = OpenApiSpex.body_params(conn)
+
     with {:ok, %User{} = user} <- Accounts.register_user(user_params) do
       conn
       |> put_status(:created)
@@ -54,7 +56,7 @@ defmodule PentoWeb.UserController do
       not_found: {"User not found", "application/json", ErrorResponse}
     ]
 
-  def show(conn, %{"id" => id}) do
+  def show(conn, %{id: id}) do
     user = Accounts.get_user!(id)
     render(conn, :show, user: user)
   end
@@ -70,7 +72,8 @@ defmodule PentoWeb.UserController do
       not_found: {"User not found", "application/json", ErrorResponse}
     ]
 
-  def update(conn, %{"id" => id, "user" => user_params}) do
+  def update(conn, %{:id => id}) do
+    %{user: user_params} = OpenApiSpex.body_params(conn)
     user = Accounts.get_user!(id)
 
     with {:ok, %User{} = user} <- Accounts.update_user_info(user, user_params) do
@@ -88,7 +91,7 @@ defmodule PentoWeb.UserController do
       not_found: {"User not found", "application/json", ErrorResponse}
     ]
 
-  def delete(conn, %{"id" => id}) do
+  def delete(conn, %{:id => id}) do
     user = Accounts.get_user!(id)
 
     with {:ok, %User{}} <- Accounts.delete_user(user) do

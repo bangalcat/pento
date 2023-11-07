@@ -63,4 +63,8 @@ defmodule PentoWeb.ConnCase do
     |> Phoenix.ConnTest.init_test_session(%{})
     |> Plug.Conn.put_session(:user_token, token)
   end
+
+  def api_spec do
+    PentoWeb.ApiSpec.spec()
+  end
 end

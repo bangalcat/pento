@@ -3,9 +3,16 @@ defmodule PentoWeb.Schema.UserResponse do
 
   OpenApiSpex.schema(%{
     type: :object,
-    required: [:user],
+    required: [:data],
     properties: %{
-      user: PentoWeb.Schema.User
+      data: PentoWeb.Schema.User
+    },
+    example: %{
+      data: %{
+        id: 1,
+        username: "john",
+        email: "test@test.com"
+      }
     }
   })
 end

@@ -2,6 +2,7 @@ defmodule PentoWeb.UserControllerTest do
   use PentoWeb.ConnCase
 
   import Pento.AccountsFixtures
+  import OpenApiSpex.TestAssertions
 
   alias Pento.Accounts.User
 
@@ -15,9 +16,39 @@ defmodule PentoWeb.UserControllerTest do
   end
 
   describe "index" do
-    test "lists all users", %{conn: conn} do
+    setup [:create_user]
+
+    test "lists all users", %{conn: conn, user: user} do
       conn = get(conn, ~p"/api/users")
-      assert json_response(conn, 200)["data"] == []
+      result = json_response(conn, 200)
+
+      assert_response_schema result, "UserListResponse", api_spec()
+
+      assert result["data"] == [
+               %{"id" => user.id, "username" => user.username, "email" => user.email}
+             ]
+    end
+  end
+
+  describe "show" do
+    setup [:create_user]
+
+    test "show a user", %{conn: conn, user: user} do
+      conn = get(conn, ~p"/api/users/#{user}")
+      result = json_response(conn, 200)
+
+      assert_response_schema result, "UserResponse", api_spec()
+
+      assert result["data"] == %{
+               "id" => user.id,
+               "username" => user.username,
+               "email" => user.email
+             }
+    end
+
+    test "example test" do
+      schema = PentoWeb.Schema.UserResponse.schema()
+      assert_schema(schema.example, "UserResponse", api_spec())
     end
   end
 
@@ -27,11 +58,14 @@ defmodule PentoWeb.UserControllerTest do
       email = unique_user_email()
 
       conn =
-        post(conn, ~p"/api/users",
+        conn
+        |> put_req_header("content-type", "application/json")
+        |> post(~p"/api/users",
           user: valid_user_attributes(%{username: username, email: email})
         )
 
-      assert %{"id" => id} = json_response(conn, 201)["data"]
+      assert %{"data" => %{"id" => id}} = result = json_response(conn, 201)
+      assert_response_schema result, "UserResponse", api_spec()
 
       conn = get(conn, ~p"/api/users/#{id}")
 
@@ -52,7 +86,11 @@ defmodule PentoWeb.UserControllerTest do
     setup [:create_user]
 
     test "renders user when data is valid", %{conn: conn, user: %User{id: id} = user} do
-      conn = put(conn, ~p"/api/users/#{user}", user: @update_attrs)
+      conn =
+        conn
+        |> put_req_header("content-type", "application/json")
+        |> put(~p"/api/users/#{user}", user: @update_attrs)
+
       assert %{"id" => ^id} = json_response(conn, 200)["data"]
 
       conn = get(conn, ~p"/api/users/#{id}")

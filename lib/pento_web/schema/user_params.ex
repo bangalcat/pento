@@ -4,11 +4,17 @@ defmodule PentoWeb.Schema.UserParams do
 
   OpenApiSpex.schema(%{
     type: :object,
-    required: [:username, :email, :password],
+    required: [:user],
     properties: %{
-      username: %Schema{type: :string},
-      email: %Schema{type: :string},
-      password: %Schema{type: :string}
+      user: %Schema{
+        type: :object,
+        required: [:username, :email, :password],
+        properties: %{
+          username: %Schema{type: :string},
+          email: %Schema{type: :string},
+          password: %Schema{type: :string}
+        }
+      }
     }
   })
 end

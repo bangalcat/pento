@@ -4,9 +4,9 @@ defmodule PentoWeb.Schema.UserListResponse do
 
   OpenApiSpex.schema(%{
     type: :object,
-    required: [:users],
+    required: [:data],
     properties: %{
-      users: %Schema{type: :array, items: PentoWeb.Schema.User}
+      data: %Schema{type: :array, items: PentoWeb.Schema.User}
     }
   })
 end

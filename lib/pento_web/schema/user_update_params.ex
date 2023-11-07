@@ -4,9 +4,15 @@ defmodule PentoWeb.Schema.UserUpdateParams do
 
   OpenApiSpex.schema(%{
     type: :object,
-    required: [:username],
+    required: [:user],
     properties: %{
-      username: %Schema{type: :string}
+      user: %Schema{
+        type: :object,
+        required: [:username],
+        properties: %{
+          username: %Schema{type: :string}
+        }
+      }
     }
   })
 end

@@ -13,6 +13,7 @@ defmodule PentoWeb.Schema.UserResponse do
         username: "john",
         email: "test@test.com"
       }
-    }
+    },
+    additionalProperties: false
   })
 end

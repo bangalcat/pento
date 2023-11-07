@@ -77,8 +77,14 @@ defmodule PentoWeb.UserControllerTest do
     end
 
     test "renders errors when data is invalid", %{conn: conn} do
-      conn = post(conn, ~p"/api/users", user: @invalid_attrs)
-      assert json_response(conn, 422)["errors"] != %{}
+      conn =
+        conn
+        |> put_req_header("content-type", "application/json")
+        |> post(~p"/api/users", user: @invalid_attrs)
+
+      result = json_response(conn, 422)
+      assert_response_schema result, "CommonErrorResponse", api_spec()
+      assert result["errors"] != []
     end
   end
 
@@ -105,8 +111,28 @@ defmodule PentoWeb.UserControllerTest do
     end
 
     test "renders errors when data is invalid", %{conn: conn, user: user} do
-      conn = put(conn, ~p"/api/users/#{user}", user: @invalid_attrs)
-      assert json_response(conn, 422)["errors"] != %{}
+      conn =
+        conn
+        |> put_req_header("content-type", "application/json")
+        |> put(~p"/api/users/#{user}", user: @invalid_attrs)
+
+      result = json_response(conn, 422)
+      assert_response_schema result, "CommonErrorResponse", api_spec()
+      assert result["errors"] != []
+    end
+
+    test "renders errors when not found user", %{conn: conn} do
+      {404, _, json} =
+        assert_error_sent 404, fn ->
+          conn =
+            conn
+            |> put_req_header("content-type", "application/json")
+            |> put(~p"/api/users/#{9_999_999}", user: @update_attrs)
+        end
+
+      result = Jason.decode!(json)
+      assert_response_schema result, "CommonErrorResponse", api_spec()
+      assert result["errors"] != []
     end
   end
 

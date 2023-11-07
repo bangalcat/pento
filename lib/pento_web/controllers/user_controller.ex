@@ -9,7 +9,7 @@ defmodule PentoWeb.UserController do
   alias PentoWeb.Schema.UserUpdateParams
   alias PentoWeb.Schema.UserResponse
   alias PentoWeb.Schema.UserListResponse
-  alias PentoWeb.Schema.ErrorResponse
+  alias PentoWeb.Schema.CommonErrorResponse
 
   action_fallback PentoWeb.FallbackController
 
@@ -32,7 +32,8 @@ defmodule PentoWeb.UserController do
     summary: "Create user",
     request_body: {"User params", "application/json", UserParams},
     responses: %{
-      201 => {"User created Response", "application/json", UserResponse}
+      201 => {"User created Response", "application/json", UserResponse},
+      422 => {"Validation error", "application/json", CommonErrorResponse}
     }
 
   def create(conn, _) do
@@ -53,7 +54,7 @@ defmodule PentoWeb.UserController do
     ],
     responses: [
       ok: {"User response", "application/json", UserResponse},
-      not_found: {"User not found", "application/json", ErrorResponse}
+      not_found: {"User not found", "application/json", CommonErrorResponse}
     ]
 
   def show(conn, %{id: id}) do
@@ -69,7 +70,7 @@ defmodule PentoWeb.UserController do
     request_body: {"User params", "application/json", UserUpdateParams},
     responses: [
       ok: {"Updated User response", "application/json", UserResponse},
-      not_found: {"User not found", "application/json", ErrorResponse}
+      not_found: {"User not found", "application/json", CommonErrorResponse}
     ]
 
   def update(conn, %{:id => id}) do
@@ -88,7 +89,7 @@ defmodule PentoWeb.UserController do
     ],
     responses: [
       no_content: {"User deleted", "application/json", nil},
-      not_found: {"User not found", "application/json", ErrorResponse}
+      not_found: {"User not found", "application/json", CommonErrorResponse}
     ]
 
   def delete(conn, %{:id => id}) do

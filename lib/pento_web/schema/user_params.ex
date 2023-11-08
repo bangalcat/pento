@@ -10,9 +10,9 @@ defmodule PentoWeb.Schema.UserParams do
         type: :object,
         required: [:username, :email, :password],
         properties: %{
-          username: %Schema{type: :string},
-          email: %Schema{type: :string},
-          password: %Schema{type: :string}
+          username: %Schema{type: :string, maxLength: 30},
+          email: PentoWeb.Schema.EmailString,
+          password: %Schema{type: :string, minLength: 4, maxLength: 72}
         }
       }
     }

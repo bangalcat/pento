@@ -19,6 +19,7 @@ defmodule PentoWeb.ProductController do
     render_error: PentoWeb.Plug.CastErrorRenderer,
     replace_params: false
 
+  @doc false
   def open_api_operation(action) do
     apply(__MODULE__, :"#{action}_operation", [])
   end

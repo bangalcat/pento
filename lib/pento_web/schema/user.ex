@@ -8,7 +8,7 @@ defmodule PentoWeb.Schema.User do
     properties: %{
       id: %Schema{type: :integer},
       username: %Schema{type: :string},
-      email: %Schema{type: :string}
+      email: PentoWeb.Schema.EmailString
     },
     additionalProperties: false
   })

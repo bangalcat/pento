@@ -5,7 +5,7 @@ defmodule PentoWeb.Schema.CreateProductParams do
   schema do
     property :name, :string
     property :description, :string
-    property :unit_price, :number
+    property :unit_price, :number, minimum: 0.0
     property :sku, :integer
     property :image_upload, :string, format: :binary
     additional_properties false

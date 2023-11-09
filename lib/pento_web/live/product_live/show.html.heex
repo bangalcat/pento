@@ -13,6 +13,7 @@
   <:item title="Description"><%= @product.description %></:item>
   <:item title="Unit price"><%= @product.unit_price %></:item>
   <:item title="Sku"><%= @product.sku %></:item>
+  <:item title="Categories"><%= Enum.map_join(@product.categories, ",", & &1.title)  %></:item>
 </.list>
 <div>
   <img :if={@product.image_upload} alt="product image" width="200" src={@product.image_upload} />

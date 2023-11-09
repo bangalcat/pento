@@ -22,6 +22,13 @@ defmodule PentoWeb.ProductLive.FormComponent do
         <.input field={@form[:name]} type="text" label="Name" />
         <.input field={@form[:description]} type="text" label="Description" />
         <.input field={@form[:unit_price]} type="number" label="Unit price" step="any" />
+        <.input
+          field={@form[:categories]}
+          type="select"
+          label="Categories"
+          multiple
+          options={@categories}
+        />
         <.input field={@form[:sku]} type="number" label="Sku" />
         <div phx-drop-target={@uploads.image.ref}>
           <.label>Image</.label>
@@ -50,10 +57,12 @@ defmodule PentoWeb.ProductLive.FormComponent do
   @impl true
   def update(%{product: product} = assigns, socket) do
     changeset = Catalog.change_product(product)
+    categories = Catalog.list_categories() |> Enum.map(fn c -> {c.title, c.id} end)
 
     {:ok,
      socket
      |> assign(assigns)
+     |> assign(:categories, categories)
      |> assign_form(changeset)
      |> allow_upload(:image,
        accept: ~w(.jpg .jpeg .png),
@@ -84,6 +93,7 @@ defmodule PentoWeb.ProductLive.FormComponent do
 
   defp save_product(socket, :edit, product_params) do
     product_params = params_with_image(socket, product_params)
+    product_params = Map.put(product_params, "category_ids", product_params["categories"])
 
     case Catalog.update_product(socket.assigns.product, product_params) do
       {:ok, product} ->

@@ -99,7 +99,7 @@ defmodule Pento.Catalog do
 
   """
   def change_product(%Product{} = product, attrs \\ %{}) do
-    categories = list_categories_by_id(attrs[:category_ids])
+    categories = list_categories_by_id(attrs[:category_ids] || attrs["category_ids"])
 
     product
     |> Repo.preload(:categories)
@@ -288,7 +288,7 @@ defmodule Pento.Catalog do
   """
   def get_category!(id), do: Repo.get!(Category, id)
 
-  def get_cateogries_by_names(names) do
+  def get_categories_by_names(names) do
     from(c in Category, where: c.title in ^names)
     |> Repo.all()
   end

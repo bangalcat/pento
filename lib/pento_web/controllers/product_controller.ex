@@ -71,7 +71,7 @@ defmodule PentoWeb.ProductController do
   def create(conn, _) do
     product_params = OpenApiSpex.body_params(conn)
 
-    categories = Catalog.get_cateogries_by_names(product_params.categories)
+    categories = Catalog.get_categories_by_names(product_params.categories)
     category_ids = Enum.map(categories, & &1.id)
 
     with {:ok, path} <- maybe_upload_static_file(product_params.image_upload),
@@ -152,7 +152,7 @@ defmodule PentoWeb.ProductController do
   def update(conn, %{"id" => id}) do
     product_params = OpenApiSpex.body_params(conn)
     product = Catalog.get_product!(id)
-    categories = Catalog.get_cateogries_by_names(product_params.categories)
+    categories = Catalog.get_categories_by_names(product_params.categories)
     category_ids = Enum.map(categories, & &1.id)
 
     with {:ok, path} <- maybe_upload_static_file(product_params.image_upload),

@@ -3,6 +3,7 @@ defmodule Pento.Catalog.Product do
   import Ecto.Changeset
   import Ecto.Query
   alias Pento.Survey.Rating
+  alias Pento.Catalog.Category
 
   schema "products" do
     field :name, :string
@@ -14,6 +15,7 @@ defmodule Pento.Catalog.Product do
     timestamps()
 
     has_many :ratings, Rating
+    many_to_many :categories, Category, join_through: "product_categories"
   end
 
   @doc false

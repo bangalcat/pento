@@ -35,3 +35,7 @@ products = [
 Enum.each(products, fn product ->
   Catalog.create_product(product)
 end)
+
+for title <- ["Survival", "Arcade", "RPG", "Simulation"] do
+  {:ok, _} = Pento.Catalog.create_category(%{title: title})
+end

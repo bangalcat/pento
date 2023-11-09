@@ -4,6 +4,7 @@ defmodule PentoWeb.ProductControllerTest do
   import Pento.CatalogFixtures
   import OpenApiSpex.TestAssertions
 
+  alias Pento.Catalog.Category
   alias Pento.Catalog.Product
 
   @create_attrs %{
@@ -38,10 +39,14 @@ defmodule PentoWeb.ProductControllerTest do
   end
 
   describe "create product" do
-    test "renders product when data is valid", %{conn: conn} do
+    setup [:create_category]
+
+    test "renders product when data is valid", %{conn: conn, category: cat} do
+      attrs = @create_attrs |> Map.put(:categories, [cat.title])
+
       conn =
         conn
-        |> post(~p"/api/products", @create_attrs)
+        |> post(~p"/api/products", attrs)
 
       assert %{"id" => id} = json_response(conn, 201)["data"]
 
@@ -57,7 +62,8 @@ defmodule PentoWeb.ProductControllerTest do
                "image_upload" => "/images/example.png",
                "name" => "some name",
                "sku" => 42,
-               "unit_price" => 120.5
+               "unit_price" => 120.5,
+               "categories" => [cat.title]
              }
     end
 
@@ -70,10 +76,15 @@ defmodule PentoWeb.ProductControllerTest do
   end
 
   describe "update product" do
-    setup [:create_product]
+    setup [:create_product, :create_category]
 
-    test "renders product when data is valid", %{conn: conn, product: %Product{id: id} = product} do
-      conn = put(conn, ~p"/api/products/#{product}", @update_attrs)
+    test "renders product when data is valid", %{
+      conn: conn,
+      product: %Product{id: id} = product,
+      category: %Category{title: title}
+    } do
+      attrs = @update_attrs |> Map.put(:categories, [title])
+      conn = put(conn, ~p"/api/products/#{product}", attrs)
       result = json_response(conn, 200)
       assert_response_schema result, "ProductResponse", api_spec()
       assert %{"id" => ^id} = result["data"]
@@ -86,7 +97,8 @@ defmodule PentoWeb.ProductControllerTest do
                "image_upload" => "/images/example.png",
                "name" => "some updated name",
                "sku" => 43,
-               "unit_price" => 456.7
+               "unit_price" => 456.7,
+               "categories" => [^title]
              } = json_response(conn, 200)["data"]
     end
 
@@ -114,5 +126,10 @@ defmodule PentoWeb.ProductControllerTest do
   defp create_product(_) do
     product = product_fixture()
     %{product: product}
+  end
+
+  defp create_category(_) do
+    category = category_fixture()
+    %{category: category}
   end
 end

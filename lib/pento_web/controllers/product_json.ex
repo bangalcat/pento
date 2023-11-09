@@ -22,7 +22,12 @@ defmodule PentoWeb.ProductJSON do
       description: product.description,
       unit_price: product.unit_price,
       sku: product.sku,
-      image_upload: product.image_upload
+      image_upload: product.image_upload,
+      categories: categories(product)
     }
+  end
+
+  defp categories(%Product{} = product) do
+    for cat <- product.categories, do: cat.title
   end
 end

@@ -8,6 +8,7 @@ defmodule PentoWeb.Schema.UpdateProductParams do
     property :unit_price, :number
     property :sku, :integer
     property :image_upload, :string, format: :binary
+    property :categories, :array, items: :string, default: []
     additional_properties false
   end
 end

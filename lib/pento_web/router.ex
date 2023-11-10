@@ -103,6 +103,8 @@ defmodule PentoWeb.Router do
 
     resources "/users", UserController, except: [:new, :edit]
     resources "/products", ProductController, except: [:new, :edit]
+
+    get "/users/:user_id/demographic", DemographicController, :show
   end
 
   scope "/api" do

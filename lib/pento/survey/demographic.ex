@@ -1,15 +1,18 @@
 defmodule Pento.Survey.Demographic do
-  alias Pento.Accounts.User
   use Ecto.Schema
   import Ecto.Changeset
 
+  alias Pento.Accounts.User
+
+  @derive {Jason.Encoder,
+           only: [:gender, :year_of_birth, :education, :user_id, :inserted_at, :updated_at]}
   schema "demographics" do
     field :gender, :string
     field :year_of_birth, :integer
     field :education, :string
     belongs_to :user, User
 
-    timestamps()
+    timestamps(type: :utc_datetime)
   end
 
   @doc false

@@ -29,6 +29,9 @@ defmodule PentoWeb.ProductController do
       tags: ["products"],
       summary: "Product list",
       operationId: "ProductController.index",
+      security: [
+        %{"authorization" => []}
+      ],
       responses: %{
         200 =>
           response(
@@ -50,6 +53,9 @@ defmodule PentoWeb.ProductController do
       tags: ["products"],
       summary: "Create product",
       operationId: "ProductController.create",
+      security: [
+        %{"authorization" => []}
+      ],
       requestBody:
         request_body(
           "Product params",
@@ -122,6 +128,9 @@ defmodule PentoWeb.ProductController do
       tags: ["products"],
       summary: "Update product",
       operationId: "ProductController.update",
+      security: [
+        %{"authorization" => []}
+      ],
       parameters: [
         parameter(:id, :path, :integer, "Product ID", required: true)
       ],
@@ -170,6 +179,9 @@ defmodule PentoWeb.ProductController do
       tags: ["products"],
       summary: "Delete product",
       operationId: "ProductController.delete",
+      security: [
+        %{"authorization" => []}
+      ],
       parameters: [
         parameter(:id, :path, :integer, "Product ID", required: true)
       ],

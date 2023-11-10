@@ -15,6 +15,7 @@ defmodule PentoWeb.Router do
 
   pipeline :api do
     plug :accepts, ["json"]
+    plug :fetch_current_user_from_header
     plug OpenApiSpex.Plug.PutApiSpec, module: PentoWeb.ApiSpec
   end
 
@@ -100,6 +101,7 @@ defmodule PentoWeb.Router do
 
   scope "/api", PentoWeb do
     pipe_through [:api]
+    # pipe_through [:api, :require_authenticated_user_json]
 
     resources "/users", UserController, except: [:new, :edit]
     resources "/products", ProductController, except: [:new, :edit]

@@ -108,6 +108,21 @@ defmodule PentoWeb.UserAuth do
     end
   end
 
+  def fetch_current_user_from_header(conn, _opts) do
+    case get_req_header(conn, "authorization") do
+      ["Bearer user:" <> user_id] ->
+        user = Accounts.get_user!(user_id)
+        assign(conn, :current_user, user)
+
+      ["Bearer " <> token] ->
+        user = Accounts.get_user_by_session_token(token)
+        assign(conn, :current_user, user)
+
+      _ ->
+        assign(conn, :current_user, nil)
+    end
+  end
+
   @doc """
   Handles mounting and authenticating the current_user in LiveViews.
 
@@ -193,6 +208,18 @@ defmodule PentoWeb.UserAuth do
       |> halt()
     else
       conn
+    end
+  end
+
+  def require_authenticated_user_json(conn, _) do
+    if conn.assigns[:current_user] do
+      conn
+    else
+      conn
+      |> put_status(:unauthorized)
+      |> put_view(PentoWeb.ErrorJSON)
+      |> render("401.json")
+      |> halt()
     end
   end
 

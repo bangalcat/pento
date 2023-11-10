@@ -16,6 +16,7 @@ defmodule PentoWeb.UserController do
   plug OpenApiSpex.Plug.CastAndValidate, json_render_error_v2: true
 
   tags ["users"]
+  security [%{"authorization" => []}]
 
   operation :index,
     summary: "User list",

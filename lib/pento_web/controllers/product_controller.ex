@@ -198,8 +198,6 @@ defmodule PentoWeb.ProductController do
     end
   end
 
-  defp maybe_upload_static_file(nil), do: {:ok, nil}
-
   defp maybe_upload_static_file(%{path: path}) do
     # Plug in your production image file persistence implementation here!
     filename = Path.basename(path)
@@ -208,4 +206,7 @@ defmodule PentoWeb.ProductController do
 
     {:ok, ~p"/images/#{filename}"}
   end
+
+  defp maybe_upload_static_file(nil), do: {:ok, nil}
+  defp maybe_upload_static_file(""), do: {:ok, nil}
 end

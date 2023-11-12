@@ -93,7 +93,9 @@ defmodule Pento.MixProject do
     [
       main: "Pento",
       extras: ["README.md"],
-      groups_for_modules: groups_for_modules()
+      groups_for_modules: groups_for_modules(),
+      output: "docs",
+      formatters: ["html"]
     ]
   end
 

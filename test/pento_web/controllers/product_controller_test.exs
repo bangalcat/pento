@@ -34,7 +34,7 @@ defmodule PentoWeb.ProductControllerTest do
       conn = get(conn, ~p"/api/products")
       result = json_response(conn, 200)
       assert_response_schema result, "ProductListResponse", api_spec()
-      assert [%{"id" => ^id}] = result["data"]
+      assert %{"cursor" => _, "total" => 1, "data" => [%{"id" => ^id}]} = result
     end
   end
 

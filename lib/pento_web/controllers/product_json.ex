@@ -4,8 +4,8 @@ defmodule PentoWeb.ProductJSON do
   @doc """
   Renders a list of products.
   """
-  def index(%{products: products}) do
-    %{data: for(product <- products, do: data(product))}
+  def index(%{products: products, cursor: cursor, total: total}) do
+    %{data: for(product <- products, do: data(product)), cursor: cursor, total: total}
   end
 
   @doc """

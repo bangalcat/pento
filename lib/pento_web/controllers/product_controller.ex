@@ -11,6 +11,8 @@ defmodule PentoWeb.ProductController do
   alias PentoWeb.Schema.UpdateProductParams
   alias PentoWeb.Schema.ProductListResponse
   alias PentoWeb.Schema.ProductResponse
+  alias PentoWeb.Schema.Common.Cursor
+  alias PentoWeb.Schema.Common.PageSize
 
   action_fallback PentoWeb.FallbackController
 
@@ -29,6 +31,10 @@ defmodule PentoWeb.ProductController do
       tags: ["products"],
       summary: "Product list",
       operationId: "ProductController.index",
+      parameters: [
+        parameter(:cursor, :query, Cursor, "base encoded cursor", []),
+        parameter(:limit, :query, PageSize, "per page", [])
+      ],
       security: [
         %{"authorization" => []}
       ],
@@ -44,8 +50,12 @@ defmodule PentoWeb.ProductController do
   end
 
   def index(conn, _params) do
-    products = Catalog.list_products()
-    render(conn, :index, products: products)
+    params = OpenApiSpex.params(conn)
+
+    %{entries: products, cursor: cursor, total: total} =
+      Catalog.list_products_by_pagination(params[:cursor], params.limit)
+
+    render(conn, :index, products: products, cursor: cursor, total: total)
   end
 
   def create_operation() do

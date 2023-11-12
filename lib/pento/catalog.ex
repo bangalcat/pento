@@ -21,6 +21,38 @@ defmodule Pento.Catalog do
     Product |> Repo.all() |> Repo.preload(:categories)
   end
 
+  def list_products_by_pagination(query \\ Product, cursor, limit) do
+    entries =
+      query
+      |> query_by_cursor(cursor)
+      |> order_by([u], u.id)
+      |> limit(^limit)
+      |> Repo.all()
+      |> Repo.preload(:categories)
+
+    total = Repo.aggregate(query, :count)
+
+    cursor = last_cursor(entries, :id)
+
+    %{
+      entries: entries,
+      total: total,
+      cursor: cursor
+    }
+  end
+
+  defp query_by_cursor(query, cursor) do
+    case cursor do
+      nil -> query
+      _ -> query |> where([u], u.id > ^cursor)
+    end
+  end
+
+  defp last_cursor([], _), do: nil
+
+  defp last_cursor(list, key),
+    do: List.last(list) |> Map.get(key) |> then(&"cursor:#{&1}") |> Base.encode64()
+
   @doc """
   Gets a single product.
 

@@ -363,18 +363,36 @@ defmodule Pento.Accounts do
     end
   end
 
-  @doc """
-  Returns the list of users.
+  def list_users(query \\ User, cursor, limit) do
+    entries =
+      query
+      |> query_by_cursor(cursor)
+      |> order_by([u], u.id)
+      |> limit(^limit)
+      |> Repo.all()
 
-  ## Examples
+    total = Repo.aggregate(query, :count)
 
-      iex> list_users()
-      [%User{}, ...]
+    cursor = last_cursor(entries, :id)
 
-  """
-  def list_users do
-    Repo.all(User)
+    %{
+      entries: entries,
+      total: total,
+      cursor: cursor
+    }
   end
+
+  defp query_by_cursor(query, cursor) do
+    case cursor do
+      nil -> query
+      _ -> query |> where([u], u.id > ^cursor)
+    end
+  end
+
+  defp last_cursor([], _), do: nil
+
+  defp last_cursor(list, key),
+    do: List.last(list) |> Map.get(key) |> then(&"cursor:#{&1}") |> Base.encode64()
 
   @doc """
   Deletes a user.

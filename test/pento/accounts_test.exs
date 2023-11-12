@@ -509,7 +509,8 @@ defmodule Pento.AccountsTest do
   describe "users" do
     test "list_users/0 returns all users" do
       user = user_fixture()
-      assert Accounts.list_users() == [user]
+      cursor = "cursor:#{user.id}" |> Base.encode64()
+      assert Accounts.list_users(nil, 10) == %{entries: [user], total: 1, cursor: cursor}
     end
 
     test "get_user!/1 returns the user with given id" do

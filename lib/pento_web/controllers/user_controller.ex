@@ -10,23 +10,33 @@ defmodule PentoWeb.UserController do
   alias PentoWeb.Schema.UserResponse
   alias PentoWeb.Schema.UserListResponse
   alias PentoWeb.Schema.CommonErrorResponse
+  alias PentoWeb.Schema.Common.Cursor
+  alias PentoWeb.Schema.Common.PageSize
 
   action_fallback PentoWeb.FallbackController
 
   plug OpenApiSpex.Plug.CastAndValidate, json_render_error_v2: true
 
   tags ["users"]
-  security [%{"authorization" => []}]
+  # security [%{"authorization" => []}]
 
   operation :index,
     summary: "User list",
+    parameters: [
+      cursor: [in: :query, schema: Cursor],
+      limit: [in: :query, schema: PageSize]
+    ],
     responses: [
       ok: {"User list response", "application/json", UserListResponse}
     ]
 
   def index(conn, _params) do
-    users = Accounts.list_users()
-    render(conn, :index, users: users)
+    params = OpenApiSpex.params(conn)
+
+    %{entries: users, cursor: cursor, total: total} =
+      Accounts.list_users(params[:cursor], params.limit)
+
+    render(conn, :index, users: users, cursor: cursor, total: total)
   end
 
   operation :create,

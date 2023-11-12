@@ -27,6 +27,36 @@ defmodule PentoWeb.UserControllerTest do
       assert result["data"] == [
                %{"id" => user.id, "username" => user.username, "email" => user.email}
              ]
+
+      assert result["cursor"] == Base.encode64("cursor:#{user.id}")
+      assert result["total"] == 1
+    end
+
+    test "pagination all users", %{conn: conn} do
+      for _ <- 1..5 do
+        user_fixture()
+      end
+
+      conn = get(conn, ~p"/api/users", limit: 3)
+
+      result = json_response(conn, 200)
+
+      assert_response_schema result, "UserListResponse", api_spec()
+      assert %{"data" => [_, _, _], "cursor" => _, "total" => 6} = result
+
+      conn = get(conn, ~p"/api/users", cursor: result["cursor"], limit: 3)
+
+      result = json_response(conn, 200)
+
+      assert_response_schema result, "UserListResponse", api_spec()
+      assert %{"data" => [_, _, _], "cursor" => _, "total" => 6} = result
+
+      conn = get(conn, ~p"/api/users", cursor: result["cursor"], limit: 3)
+
+      result = json_response(conn, 200)
+
+      assert_response_schema result, "UserListResponse", api_spec()
+      assert %{"data" => [], "cursor" => nil, "total" => 6} = result
     end
   end
 

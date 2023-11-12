@@ -85,7 +85,7 @@ defmodule Pento.Accounts.User do
     end
   end
 
-  # NOTE: impure한 함수가 아닌가?
+  # NOTE: impure한 함수
   defp maybe_validate_unique_email(changeset, opts) do
     if Keyword.get(opts, :validate_email, true) do
       changeset

@@ -4,8 +4,8 @@ defmodule PentoWeb.UserJSON do
   @doc """
   Renders a list of users.
   """
-  def index(%{users: users}) do
-    %{data: for(user <- users, do: data(user))}
+  def index(%{users: users, cursor: cursor, total: total}) do
+    %{data: for(user <- users, do: data(user)), cursor: cursor, total: total}
   end
 
   @doc """

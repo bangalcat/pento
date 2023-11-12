@@ -18,7 +18,8 @@ defmodule Pento.MixProject do
             aliases: true
           ]
         ]
-      ]
+      ],
+      docs: docs()
     ]
   end
 
@@ -41,6 +42,7 @@ defmodule Pento.MixProject do
   # Type `mix help deps` for examples and options.
   defp deps do
     [
+      {:ex_doc, "~> 0.29", only: :dev, runtime: false},
       {:bcrypt_elixir, "~> 3.0"},
       {:phoenix, "~> 1.7.7"},
       {:phoenix_ecto, "~> 4.4"},
@@ -82,7 +84,21 @@ defmodule Pento.MixProject do
       test: ["ecto.create --quiet", "ecto.migrate --quiet", "test"],
       "assets.setup": ["tailwind.install --if-missing", "esbuild.install --if-missing"],
       "assets.build": ["tailwind default", "esbuild default"],
-      "assets.deploy": ["tailwind default --minify", "esbuild default --minify", "phx.digest"]
+      "assets.deploy": ["tailwind default --minify", "esbuild default --minify", "phx.digest"],
+      docs: ["boundary.ex_doc_groups", "docs"]
     ]
+  end
+
+  defp docs do
+    [
+      main: "Pento",
+      extras: ["README.md"],
+      groups_for_modules: groups_for_modules()
+    ]
+  end
+
+  defp groups_for_modules do
+    {list, _} = Code.eval_file("boundary.exs")
+    list
   end
 end

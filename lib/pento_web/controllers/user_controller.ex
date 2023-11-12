@@ -10,8 +10,6 @@ defmodule PentoWeb.UserController do
   alias PentoWeb.Schema.UserResponse
   alias PentoWeb.Schema.UserListResponse
   alias PentoWeb.Schema.CommonErrorResponse
-  alias PentoWeb.Schema.Common.Cursor
-  alias PentoWeb.Schema.Common.PageSize
 
   action_fallback PentoWeb.FallbackController
 
@@ -23,8 +21,8 @@ defmodule PentoWeb.UserController do
   operation :index,
     summary: "User list",
     parameters: [
-      cursor: [in: :query, schema: Cursor, description: "base encoded cursor"],
-      limit: [in: :query, schema: PageSize, description: "per page"]
+      cursor: [in: :query, type: :string, description: "base encoded cursor"],
+      limit: [in: :query, type: :integer, description: "per page"]
     ],
     responses: [
       ok: {"User list response", "application/json", UserListResponse}
@@ -32,9 +30,11 @@ defmodule PentoWeb.UserController do
 
   def index(conn, _params) do
     params = OpenApiSpex.params(conn)
+    cursor = parse_cursor(params[:cursor])
+    limit = params[:limit] || 10
 
     %{entries: users, cursor: cursor, total: total} =
-      Accounts.list_users(params[:cursor], params.limit)
+      Accounts.list_users(cursor, limit)
 
     render(conn, :index, users: users, cursor: cursor, total: total)
   end
@@ -109,5 +109,12 @@ defmodule PentoWeb.UserController do
     with {:ok, %User{}} <- Accounts.delete_user(user) do
       send_resp(conn, :no_content, "")
     end
+  end
+
+  defp parse_cursor(nil), do: nil
+
+  defp parse_cursor(encoded_cursor) do
+    "cursor:" <> cursor = Base.decode64!(encoded_cursor)
+    cursor
   end
 end

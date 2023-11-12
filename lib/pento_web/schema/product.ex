@@ -1,6 +1,8 @@
 defmodule PentoWeb.Schema.Product do
   use OpenApiSpex.Schemax
 
+  alias PentoWeb.Schema.Category
+
   @required [:id, :name, :unit_price, :sku]
   schema "Product" do
     property :id, :integer
@@ -9,7 +11,7 @@ defmodule PentoWeb.Schema.Product do
     property :unit_price, :number, default: 0.0, minimum: 0.0
     property :sku, :integer
 
-    property :categories, :array, items: :string
+    property :categories, :array, items: Category
     property :image_upload, :string, format: :binary, nullable: true
 
     property :created_at, :string

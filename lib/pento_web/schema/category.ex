@@ -4,5 +4,6 @@ defmodule PentoWeb.Schema.Category do
   @schema_type :string
   schema do
     enum ["Arcade", "Survival", "RPG", "Simulation"]
+    example "Arcade"
   end
 end

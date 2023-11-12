@@ -39,7 +39,7 @@ defmodule PentoWeb.ProductControllerTest do
   end
 
   describe "create product" do
-    setup [:create_category]
+    setup [:setup_category]
 
     test "renders product when data is valid", %{conn: conn, category: cat} do
       attrs = @create_attrs |> Map.put(:categories, [cat.title])
@@ -76,7 +76,7 @@ defmodule PentoWeb.ProductControllerTest do
   end
 
   describe "update product" do
-    setup [:create_product, :create_category]
+    setup [:create_product, :setup_category]
 
     test "renders product when data is valid", %{
       conn: conn,
@@ -128,8 +128,8 @@ defmodule PentoWeb.ProductControllerTest do
     %{product: product}
   end
 
-  defp create_category(_) do
-    category = category_fixture()
+  defp setup_category(_) do
+    category = category_fixture(%{title: "RPG"})
     %{category: category}
   end
 end

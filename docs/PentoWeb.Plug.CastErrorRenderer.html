@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="ExDoc v0.30.9">
+    <meta name="project" content="pento v0.1.0">
+
+    <title>PentoWeb.Plug.CastErrorRenderer — pento v0.1.0</title>
+    <link rel="stylesheet" href="dist/html-elixir-XFYN5IVA.css" />
+
+
+    <script src="dist/handlebars.runtime-NWIB6V2M.js"></script>
+    <script src="dist/handlebars.templates-EPF2X7PV.js"></script>
+    <script src="dist/sidebar_items-301E49EA.js"></script>
+
+      <script src="docs_config.js"></script>
+
+    <script async src="dist/html-J2ASZTQE.js"></script>
+
+
+  </head>
+  <body data-type="modules" class="page-module">
+    <script>
+
+      try {
+        var settings = JSON.parse(localStorage.getItem('ex_doc:settings') || '{}');
+
+        if (settings.theme === 'dark' ||
+           ((settings.theme === 'system' || settings.theme == null) &&
+             window.matchMedia('(prefers-color-scheme: dark)').matches)
+           ) {
+          document.body.classList.add('dark')
+        }
+      } catch (error) { }
+    </script>
+
+<div class="main">
+
+<button class="sidebar-button sidebar-toggle" aria-label="toggle sidebar" aria-controls="sidebar">
+  <i class="ri-menu-line ri-lg" title="Collapse/expand sidebar"></i>
+</button>
+
+<nav id="sidebar" class="sidebar">
+  <form class="sidebar-search" action="search.html">
+    <label class="search-label">
+      <span class="sr-only">Search documentation of pento</span>
+      <input name="q" type="text" class="search-input" placeholder="Search..." autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" />
+    </label>
+    <button type="submit" class="search-button" aria-label="Submit Search">
+      <i class="ri-search-2-line" aria-hidden="true" title="Submit search"></i>
+    </button>
+    <button type="button" tabindex="-1" class="search-close-button" aria-hidden="true">
+      <i class="ri-close-line ri-lg" title="Cancel search"></i>
+    </button>
+  </form>
+
+  <div class="autocomplete">
+    <div class="autocomplete-results">
+    </div>
+  </div>
+
+  <div class="sidebar-header">
+
+    <div class="sidebar-projectDetails">
+      <a href="Pento.html" class="sidebar-projectName" translate="no">
+pento
+      </a>
+      <div class="sidebar-projectVersion" translate="no">
+        v0.1.0
+      </div>
+    </div>
+    <ul id="sidebar-listNav" class="sidebar-listNav" role="tablist">
+      <li>
+        <button id="extras-list-tab-button" role="tab" data-type="extras" aria-controls="extras-tab-panel" aria-selected="true" tabindex="0">
+Pages
+        </button>
+      </li>
+
+        <li>
+          <button id="modules-list-tab-button" role="tab" data-type="modules" aria-controls="modules-tab-panel" aria-selected="false" tabindex="-1">
+            Modules
+          </button>
+        </li>
+
+
+    </ul>
+  </div>
+
+  <div id="extras-tab-panel" class="sidebar-tabpanel" role="tabpanel" aria-labelledby="extras-list-tab-button">
+    <ul id="extras-full-list" class="full-list"></ul>
+  </div>
+
+    <div id="modules-tab-panel" class="sidebar-tabpanel" role="tabpanel" aria-labelledby="modules-list-tab-button" hidden>
+      <ul id="modules-full-list" class="full-list"></ul>
+    </div>
+
+
+</nav>
+
+<main class="content">
+  <output role="status" id="toast"></output>
+  <div class="content-outer">
+    <div id="content" class="content-inner">
+
+<h1>
+<button class="icon-action display-settings">
+  <i class="ri-settings-3-line"></i>
+  <span class="sr-only">Settings</span>
+</button>
+
+
+  <span translate="no">PentoWeb.Plug.CastErrorRenderer</span> 
+  <small class="app-vsn" translate="no">(pento v0.1.0)</small>
+
+</h1>
+
+
+  <section id="moduledoc">
+<p>This is Error Renderer plug for <a href="https://hexdocs.pm/open_api_spex/3.18.0/OpenApiSpex.Plug.CastAndValidate.html"><code class="inline">OpenApiSpex.Plug.CastAndValidate</code></a> plug</p><p>The <code class="inline">init/1</code> callback isn't invoked at compile time like other plugs.
+Instead, the <code class="inline">call/2</code> is invoked immediately after <code class="inline">init/1</code> is invoked
+with the result(errors) returned from <code class="inline">init/1</code>.</p><p>Example of errors from <a href="https://hexdocs.pm/open_api_spex/3.18.0/OpenApiSpex.Plug.CastAndValidate.html"><code class="inline">OpenApiSpex.Plug.CastAndValidate</code></a>.</p><pre><code class="makeup elixir" translate="no"><span class="p" data-group-id="4628411216-1">[</span><span class="w">
+  </span><span class="p" data-group-id="4628411216-2">%</span><span class="nc" data-group-id="4628411216-2">OpenApiSpex.Cast.Error</span><span class="p" data-group-id="4628411216-2">{</span><span class="w">
+    </span><span class="ss">format</span><span class="p">:</span><span class="w"> </span><span class="no">nil</span><span class="p">,</span><span class="w">
+    </span><span class="ss">length</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="ss">meta</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="4628411216-3">%{</span><span class="p" data-group-id="4628411216-3">}</span><span class="p">,</span><span class="w">
+    </span><span class="ss">name</span><span class="p">:</span><span class="w"> </span><span class="no">nil</span><span class="p">,</span><span class="w">
+    </span><span class="ss">path</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="4628411216-4">[</span><span class="ss">:user_id</span><span class="p" data-group-id="4628411216-4">]</span><span class="p">,</span><span class="w">
+    </span><span class="ss">reason</span><span class="p">:</span><span class="w"> </span><span class="ss">:invalid_type</span><span class="p">,</span><span class="w">
+    </span><span class="ss">type</span><span class="p">:</span><span class="w"> </span><span class="ss">:integer</span><span class="p">,</span><span class="w">
+    </span><span class="ss">value</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;wrong&quot;</span><span class="w">
+  </span><span class="p" data-group-id="4628411216-2">}</span><span class="w">
+</span><span class="p" data-group-id="4628411216-1">]</span></code></pre><p>다음은 에러 타입의 종류</p><pre><code class="makeup elixir" translate="no"><span class="w">  </span><span class="na">@type</span><span class="w"> </span><span class="n">reason</span><span class="w"> </span><span class="o">::</span><span class="w">
+        </span><span class="ss">:all_of</span><span class="w">
+        </span><span class="o">|</span><span class="w"> </span><span class="ss">:any_of</span><span class="w">
+        </span><span class="o">|</span><span class="w"> </span><span class="ss">:invalid_schema_type</span><span class="w">
+        </span><span class="o">|</span><span class="w"> </span><span class="ss">:exclusive_max</span><span class="w">
+        </span><span class="o">|</span><span class="w"> </span><span class="ss">:exclusive_min</span><span class="w">
+        </span><span class="o">|</span><span class="w"> </span><span class="ss">:invalid_discriminator_value</span><span class="w">
+        </span><span class="o">|</span><span class="w"> </span><span class="ss">:invalid_enum</span><span class="w">
+        </span><span class="o">|</span><span class="w"> </span><span class="ss">:invalid_format</span><span class="w">
+        </span><span class="o">|</span><span class="w"> </span><span class="ss">:invalid_type</span><span class="w">
+        </span><span class="o">|</span><span class="w"> </span><span class="ss">:max_items</span><span class="w">
+        </span><span class="o">|</span><span class="w"> </span><span class="ss">:max_length</span><span class="w">
+        </span><span class="o">|</span><span class="w"> </span><span class="ss">:max_properties</span><span class="w">
+        </span><span class="o">|</span><span class="w"> </span><span class="ss">:maximum</span><span class="w">
+        </span><span class="o">|</span><span class="w"> </span><span class="ss">:min_items</span><span class="w">
+        </span><span class="o">|</span><span class="w"> </span><span class="ss">:min_length</span><span class="w">
+        </span><span class="o">|</span><span class="w"> </span><span class="ss">:minimum</span><span class="w">
+        </span><span class="o">|</span><span class="w"> </span><span class="ss">:missing_field</span><span class="w">
+        </span><span class="o">|</span><span class="w"> </span><span class="ss">:missing_header</span><span class="w">
+        </span><span class="o">|</span><span class="w"> </span><span class="ss">:invalid_header</span><span class="w">
+        </span><span class="o">|</span><span class="w"> </span><span class="ss">:multiple_of</span><span class="w">
+        </span><span class="o">|</span><span class="w"> </span><span class="ss">:no_value_for_discriminator</span><span class="w">
+        </span><span class="o">|</span><span class="w"> </span><span class="ss">:null_value</span><span class="w">
+        </span><span class="o">|</span><span class="w"> </span><span class="ss">:one_of</span><span class="w">
+        </span><span class="o">|</span><span class="w"> </span><span class="ss">:unexpected_field</span><span class="w">
+        </span><span class="o">|</span><span class="w"> </span><span class="ss">:unique_items</span><span class="w">
+</span></code></pre>
+  </section>
+
+
+
+      <footer class="footer">
+        <p>
+
+          <span class="line">
+            <button class="a-main footer-button display-quick-switch" title="Search HexDocs packages">
+              Search HexDocs
+            </button>
+
+          </span>
+        </p>
+
+        <p class="built-using">
+          Built using
+          <a href="https://github.com/elixir-lang/ex_doc" title="ExDoc" target="_blank" rel="help noopener" translate="no">ExDoc</a> (v0.30.9) for the
+
+            <a href="https://elixir-lang.org" title="Elixir" target="_blank" translate="no">Elixir programming language</a>
+
+        </p>
+      </footer>
+    </div>
+  </div>
+</main>
+</div>
+
+
+  </body>
+</html>

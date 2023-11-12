@@ -1,0 +1,901 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="ExDoc v0.30.9">
+    <meta name="project" content="pento v0.1.0">
+
+    <title>API Reference — pento v0.1.0</title>
+    <link rel="stylesheet" href="dist/html-elixir-XFYN5IVA.css" />
+
+
+    <script src="dist/handlebars.runtime-NWIB6V2M.js"></script>
+    <script src="dist/handlebars.templates-EPF2X7PV.js"></script>
+    <script src="dist/sidebar_items-301E49EA.js"></script>
+
+      <script src="docs_config.js"></script>
+
+    <script async src="dist/html-J2ASZTQE.js"></script>
+
+
+  </head>
+  <body data-type="extras" class="page-extra">
+    <script>
+
+      try {
+        var settings = JSON.parse(localStorage.getItem('ex_doc:settings') || '{}');
+
+        if (settings.theme === 'dark' ||
+           ((settings.theme === 'system' || settings.theme == null) &&
+             window.matchMedia('(prefers-color-scheme: dark)').matches)
+           ) {
+          document.body.classList.add('dark')
+        }
+      } catch (error) { }
+    </script>
+
+<div class="main">
+
+<button class="sidebar-button sidebar-toggle" aria-label="toggle sidebar" aria-controls="sidebar">
+  <i class="ri-menu-line ri-lg" title="Collapse/expand sidebar"></i>
+</button>
+
+<nav id="sidebar" class="sidebar">
+  <form class="sidebar-search" action="search.html">
+    <label class="search-label">
+      <span class="sr-only">Search documentation of pento</span>
+      <input name="q" type="text" class="search-input" placeholder="Search..." autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" />
+    </label>
+    <button type="submit" class="search-button" aria-label="Submit Search">
+      <i class="ri-search-2-line" aria-hidden="true" title="Submit search"></i>
+    </button>
+    <button type="button" tabindex="-1" class="search-close-button" aria-hidden="true">
+      <i class="ri-close-line ri-lg" title="Cancel search"></i>
+    </button>
+  </form>
+
+  <div class="autocomplete">
+    <div class="autocomplete-results">
+    </div>
+  </div>
+
+  <div class="sidebar-header">
+
+    <div class="sidebar-projectDetails">
+      <a href="Pento.html" class="sidebar-projectName" translate="no">
+pento
+      </a>
+      <div class="sidebar-projectVersion" translate="no">
+        v0.1.0
+      </div>
+    </div>
+    <ul id="sidebar-listNav" class="sidebar-listNav" role="tablist">
+      <li>
+        <button id="extras-list-tab-button" role="tab" data-type="extras" aria-controls="extras-tab-panel" aria-selected="true" tabindex="0">
+Pages
+        </button>
+      </li>
+
+        <li>
+          <button id="modules-list-tab-button" role="tab" data-type="modules" aria-controls="modules-tab-panel" aria-selected="false" tabindex="-1">
+            Modules
+          </button>
+        </li>
+
+
+    </ul>
+  </div>
+
+  <div id="extras-tab-panel" class="sidebar-tabpanel" role="tabpanel" aria-labelledby="extras-list-tab-button">
+    <ul id="extras-full-list" class="full-list"></ul>
+  </div>
+
+    <div id="modules-tab-panel" class="sidebar-tabpanel" role="tabpanel" aria-labelledby="modules-list-tab-button" hidden>
+      <ul id="modules-full-list" class="full-list"></ul>
+    </div>
+
+
+</nav>
+
+<main class="content">
+  <output role="status" id="toast"></output>
+  <div class="content-outer">
+    <div id="content" class="content-inner">
+
+<h1>
+<button class="icon-action display-settings">
+  <i class="ri-settings-3-line"></i>
+  <span class="sr-only">Settings</span>
+</button>
+
+
+
+  <span>API Reference <small class="app-vsn">pento v0.1.0</small></span>
+</h1>
+
+
+  <section class="details-list">
+    <h2 id="modules" class="section-heading">
+  <a href="#modules" class="hover-link">
+    <i class="ri-link-m" aria-hidden="true"></i>
+  </a>
+  <span class="text">Modules</span>
+</h2>
+
+    <div class="summary">
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="Pento.html" translate="no">Pento</a>
+
+  </div>
+
+    <div class="summary-synopsis"><p>Pento keeps the contexts that define your domain
+and business logic.</p></div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="Pento.Accounts.html" translate="no">Pento.Accounts</a>
+
+  </div>
+
+    <div class="summary-synopsis"><p>The Accounts context.</p></div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="Pento.Accounts.User.html" translate="no">Pento.Accounts.User</a>
+
+  </div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="Pento.Accounts.UserNotifier.html" translate="no">Pento.Accounts.UserNotifier</a>
+
+  </div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="Pento.Accounts.UserToken.html" translate="no">Pento.Accounts.UserToken</a>
+
+  </div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="Pento.Catalog.html" translate="no">Pento.Catalog</a>
+
+  </div>
+
+    <div class="summary-synopsis"><p>The Catalog context.</p></div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="Pento.Catalog.Category.html" translate="no">Pento.Catalog.Category</a>
+
+  </div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="Pento.Catalog.Faq.html" translate="no">Pento.Catalog.Faq</a>
+
+  </div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="Pento.Catalog.Product.html" translate="no">Pento.Catalog.Product</a>
+
+  </div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="Pento.Catalog.Product.Query.html" translate="no">Pento.Catalog.Product.Query</a>
+
+  </div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="Pento.Catalog.Search.html" translate="no">Pento.Catalog.Search</a>
+
+  </div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="Pento.Game.html" translate="no">Pento.Game</a>
+
+  </div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="Pento.Game.Board.html" translate="no">Pento.Game.Board</a>
+
+  </div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="Pento.Game.Pentomino.html" translate="no">Pento.Game.Pentomino</a>
+
+  </div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="Pento.Game.Point.html" translate="no">Pento.Game.Point</a>
+
+  </div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="Pento.Game.Shape.html" translate="no">Pento.Game.Shape</a>
+
+  </div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="Pento.Mailer.html" translate="no">Pento.Mailer</a>
+
+  </div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="Pento.Promo.html" translate="no">Pento.Promo</a>
+
+  </div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="Pento.Promo.Recipient.html" translate="no">Pento.Promo.Recipient</a>
+
+  </div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="Pento.Repo.html" translate="no">Pento.Repo</a>
+
+  </div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="Pento.Survey.html" translate="no">Pento.Survey</a>
+
+  </div>
+
+    <div class="summary-synopsis"><p>The Survey context.</p></div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="Pento.Survey.Demographic.html" translate="no">Pento.Survey.Demographic</a>
+
+  </div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="Pento.Survey.Demographic.Query.html" translate="no">Pento.Survey.Demographic.Query</a>
+
+  </div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="Pento.Survey.Rating.html" translate="no">Pento.Survey.Rating</a>
+
+  </div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="Pento.Survey.Rating.Query.html" translate="no">Pento.Survey.Rating.Query</a>
+
+  </div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="PentoWeb.html" translate="no">PentoWeb</a>
+
+  </div>
+
+    <div class="summary-synopsis"><p>The entrypoint for defining your web interface, such
+as controllers, components, channels, and so on.</p></div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="PentoWeb.Admin.DashboardLive.html" translate="no">PentoWeb.Admin.DashboardLive</a>
+
+  </div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="PentoWeb.Admin.SurveyCountLive.html" translate="no">PentoWeb.Admin.SurveyCountLive</a>
+
+  </div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="PentoWeb.Admin.SurveyResultsLive.html" translate="no">PentoWeb.Admin.SurveyResultsLive</a>
+
+  </div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="PentoWeb.Admin.UserActivityLive.html" translate="no">PentoWeb.Admin.UserActivityLive</a>
+
+  </div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="PentoWeb.ApiSpec.html" translate="no">PentoWeb.ApiSpec</a>
+
+  </div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="PentoWeb.BarChart.html" translate="no">PentoWeb.BarChart</a>
+
+  </div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="PentoWeb.ChangesetJSON.html" translate="no">PentoWeb.ChangesetJSON</a>
+
+  </div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="PentoWeb.CoreComponents.html" translate="no">PentoWeb.CoreComponents</a>
+
+  </div>
+
+    <div class="summary-synopsis"><p>Provides core UI components.</p></div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="PentoWeb.DemographicController.html" translate="no">PentoWeb.DemographicController</a>
+
+  </div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="PentoWeb.DemographicJSON.html" translate="no">PentoWeb.DemographicJSON</a>
+
+  </div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="PentoWeb.DemographicLive.Form.html" translate="no">PentoWeb.DemographicLive.Form</a>
+
+  </div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="PentoWeb.DemographicLive.Show.html" translate="no">PentoWeb.DemographicLive.Show</a>
+
+  </div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="PentoWeb.Endpoint.html" translate="no">PentoWeb.Endpoint</a>
+
+  </div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="PentoWeb.ErrorHTML.html" translate="no">PentoWeb.ErrorHTML</a>
+
+  </div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="PentoWeb.ErrorJSON.html" translate="no">PentoWeb.ErrorJSON</a>
+
+  </div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="PentoWeb.FallbackController.html" translate="no">PentoWeb.FallbackController</a>
+
+  </div>
+
+    <div class="summary-synopsis"><p>Translates controller action results into valid <a href="https://hexdocs.pm/plug/1.15.0/Plug.Conn.html"><code class="inline">Plug.Conn</code></a> responses.</p></div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="PentoWeb.FaqLive.FormComponent.html" translate="no">PentoWeb.FaqLive.FormComponent</a>
+
+  </div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="PentoWeb.FaqLive.Index.html" translate="no">PentoWeb.FaqLive.Index</a>
+
+  </div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="PentoWeb.FaqLive.Show.html" translate="no">PentoWeb.FaqLive.Show</a>
+
+  </div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="PentoWeb.GameLive.html" translate="no">PentoWeb.GameLive</a>
+
+  </div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="PentoWeb.GameLive.Board.html" translate="no">PentoWeb.GameLive.Board</a>
+
+  </div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="PentoWeb.GameLive.Colors.html" translate="no">PentoWeb.GameLive.Colors</a>
+
+  </div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="PentoWeb.GameLive.Component.html" translate="no">PentoWeb.GameLive.Component</a>
+
+  </div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="PentoWeb.GameLive.GameInstructions.html" translate="no">PentoWeb.GameLive.GameInstructions</a>
+
+  </div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="PentoWeb.GameLive.Picker.html" translate="no">PentoWeb.GameLive.Picker</a>
+
+  </div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="PentoWeb.Gettext.html" translate="no">PentoWeb.Gettext</a>
+
+  </div>
+
+    <div class="summary-synopsis"><p>A module providing Internationalization with a gettext-based API.</p></div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="PentoWeb.Layouts.html" translate="no">PentoWeb.Layouts</a>
+
+  </div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="PentoWeb.PageController.html" translate="no">PentoWeb.PageController</a>
+
+  </div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="PentoWeb.PageHTML.html" translate="no">PentoWeb.PageHTML</a>
+
+  </div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="PentoWeb.Plug.CastErrorRenderer.html" translate="no">PentoWeb.Plug.CastErrorRenderer</a>
+
+  </div>
+
+    <div class="summary-synopsis"><p>This is Error Renderer plug for <a href="https://hexdocs.pm/open_api_spex/3.18.0/OpenApiSpex.Plug.CastAndValidate.html"><code class="inline">OpenApiSpex.Plug.CastAndValidate</code></a> plug</p></div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="PentoWeb.Presence.html" translate="no">PentoWeb.Presence</a>
+
+  </div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="PentoWeb.ProductController.html" translate="no">PentoWeb.ProductController</a>
+
+  </div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="PentoWeb.ProductJSON.html" translate="no">PentoWeb.ProductJSON</a>
+
+  </div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="PentoWeb.ProductLive.FormComponent.html" translate="no">PentoWeb.ProductLive.FormComponent</a>
+
+  </div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="PentoWeb.ProductLive.Index.html" translate="no">PentoWeb.ProductLive.Index</a>
+
+  </div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="PentoWeb.ProductLive.Show.html" translate="no">PentoWeb.ProductLive.Show</a>
+
+  </div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="PentoWeb.PromoLive.html" translate="no">PentoWeb.PromoLive</a>
+
+  </div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="PentoWeb.RatingLive.Form.html" translate="no">PentoWeb.RatingLive.Form</a>
+
+  </div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="PentoWeb.RatingLive.Index.html" translate="no">PentoWeb.RatingLive.Index</a>
+
+  </div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="PentoWeb.RatingLive.Show.html" translate="no">PentoWeb.RatingLive.Show</a>
+
+  </div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="PentoWeb.Router.html" translate="no">PentoWeb.Router</a>
+
+  </div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="PentoWeb.Schema.Category.html" translate="no">PentoWeb.Schema.Category</a>
+
+  </div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="PentoWeb.Schema.CommonErrorResponse.html" translate="no">PentoWeb.Schema.CommonErrorResponse</a>
+
+  </div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="PentoWeb.Schema.CreateProductParams.html" translate="no">PentoWeb.Schema.CreateProductParams</a>
+
+  </div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="PentoWeb.Schema.Demographic.html" translate="no">PentoWeb.Schema.Demographic</a>
+
+  </div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="PentoWeb.Schema.DemographicResponse.html" translate="no">PentoWeb.Schema.DemographicResponse</a>
+
+  </div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="PentoWeb.Schema.EmailString.html" translate="no">PentoWeb.Schema.EmailString</a>
+
+  </div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="PentoWeb.Schema.ErrorResponse.html" translate="no">PentoWeb.Schema.ErrorResponse</a>
+
+  </div>
+
+    <div class="summary-synopsis"><p>ErrorResponse</p></div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="PentoWeb.Schema.Product.html" translate="no">PentoWeb.Schema.Product</a>
+
+  </div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="PentoWeb.Schema.ProductListResponse.html" translate="no">PentoWeb.Schema.ProductListResponse</a>
+
+  </div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="PentoWeb.Schema.ProductResponse.html" translate="no">PentoWeb.Schema.ProductResponse</a>
+
+  </div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="PentoWeb.Schema.UpdateProductParams.html" translate="no">PentoWeb.Schema.UpdateProductParams</a>
+
+  </div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="PentoWeb.Schema.User.html" translate="no">PentoWeb.Schema.User</a>
+
+  </div>
+
+    <div class="summary-synopsis"><p>User</p></div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="PentoWeb.Schema.UserListResponse.html" translate="no">PentoWeb.Schema.UserListResponse</a>
+
+  </div>
+
+    <div class="summary-synopsis"><p>UserListResponse</p></div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="PentoWeb.Schema.UserParams.html" translate="no">PentoWeb.Schema.UserParams</a>
+
+  </div>
+
+    <div class="summary-synopsis"><p>UserParams</p></div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="PentoWeb.Schema.UserResponse.html" translate="no">PentoWeb.Schema.UserResponse</a>
+
+  </div>
+
+    <div class="summary-synopsis"><p>UserResponse</p></div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="PentoWeb.Schema.UserUpdateParams.html" translate="no">PentoWeb.Schema.UserUpdateParams</a>
+
+  </div>
+
+    <div class="summary-synopsis"><p>UserUpdateParams</p></div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="PentoWeb.SearchLive.html" translate="no">PentoWeb.SearchLive</a>
+
+  </div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="PentoWeb.SurveyLive.html" translate="no">PentoWeb.SurveyLive</a>
+
+  </div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="PentoWeb.SurveyLive.Component.html" translate="no">PentoWeb.SurveyLive.Component</a>
+
+  </div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="PentoWeb.Telemetry.html" translate="no">PentoWeb.Telemetry</a>
+
+  </div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="PentoWeb.UserAuth.html" translate="no">PentoWeb.UserAuth</a>
+
+  </div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="PentoWeb.UserConfirmationInstructionsLive.html" translate="no">PentoWeb.UserConfirmationInstructionsLive</a>
+
+  </div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="PentoWeb.UserConfirmationLive.html" translate="no">PentoWeb.UserConfirmationLive</a>
+
+  </div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="PentoWeb.UserController.html" translate="no">PentoWeb.UserController</a>
+
+  </div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="PentoWeb.UserForgotPasswordLive.html" translate="no">PentoWeb.UserForgotPasswordLive</a>
+
+  </div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="PentoWeb.UserJSON.html" translate="no">PentoWeb.UserJSON</a>
+
+  </div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="PentoWeb.UserLoginLive.html" translate="no">PentoWeb.UserLoginLive</a>
+
+  </div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="PentoWeb.UserRegistrationLive.html" translate="no">PentoWeb.UserRegistrationLive</a>
+
+  </div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="PentoWeb.UserResetPasswordLive.html" translate="no">PentoWeb.UserResetPasswordLive</a>
+
+  </div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="PentoWeb.UserSessionController.html" translate="no">PentoWeb.UserSessionController</a>
+
+  </div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="PentoWeb.UserSettingsLive.html" translate="no">PentoWeb.UserSettingsLive</a>
+
+  </div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="PentoWeb.WrongLive.html" translate="no">PentoWeb.WrongLive</a>
+
+  </div>
+
+</div>
+
+    </div>
+  </section>
+
+
+<div class="bottom-actions">
+  <div class="bottom-actions-item">
+
+  </div>
+  <div class="bottom-actions-item">
+
+      <a href="readme.html" class="bottom-actions-button" rel="next">
+        <span class="subheader">
+          Next Page →
+        </span>
+        <span class="title">
+Pento
+        </span>
+      </a>
+
+  </div>
+</div>
+      <footer class="footer">
+        <p>
+
+          <span class="line">
+            <button class="a-main footer-button display-quick-switch" title="Search HexDocs packages">
+              Search HexDocs
+            </button>
+
+          </span>
+        </p>
+
+        <p class="built-using">
+          Built using
+          <a href="https://github.com/elixir-lang/ex_doc" title="ExDoc" target="_blank" rel="help noopener" translate="no">ExDoc</a> (v0.30.9) for the
+
+            <a href="https://elixir-lang.org" title="Elixir" target="_blank" translate="no">Elixir programming language</a>
+
+        </p>
+      </footer>
+    </div>
+  </div>
+</main>
+</div>
+
+
+  </body>
+</html>

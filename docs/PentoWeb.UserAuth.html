@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="ExDoc v0.30.9">
+    <meta name="project" content="pento v0.1.0">
+
+    <title>PentoWeb.UserAuth — pento v0.1.0</title>
+    <link rel="stylesheet" href="dist/html-elixir-XFYN5IVA.css" />
+
+
+    <script src="dist/handlebars.runtime-NWIB6V2M.js"></script>
+    <script src="dist/handlebars.templates-EPF2X7PV.js"></script>
+    <script src="dist/sidebar_items-301E49EA.js"></script>
+
+      <script src="docs_config.js"></script>
+
+    <script async src="dist/html-J2ASZTQE.js"></script>
+
+
+  </head>
+  <body data-type="modules" class="page-module">
+    <script>
+
+      try {
+        var settings = JSON.parse(localStorage.getItem('ex_doc:settings') || '{}');
+
+        if (settings.theme === 'dark' ||
+           ((settings.theme === 'system' || settings.theme == null) &&
+             window.matchMedia('(prefers-color-scheme: dark)').matches)
+           ) {
+          document.body.classList.add('dark')
+        }
+      } catch (error) { }
+    </script>
+
+<div class="main">
+
+<button class="sidebar-button sidebar-toggle" aria-label="toggle sidebar" aria-controls="sidebar">
+  <i class="ri-menu-line ri-lg" title="Collapse/expand sidebar"></i>
+</button>
+
+<nav id="sidebar" class="sidebar">
+  <form class="sidebar-search" action="search.html">
+    <label class="search-label">
+      <span class="sr-only">Search documentation of pento</span>
+      <input name="q" type="text" class="search-input" placeholder="Search..." autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" />
+    </label>
+    <button type="submit" class="search-button" aria-label="Submit Search">
+      <i class="ri-search-2-line" aria-hidden="true" title="Submit search"></i>
+    </button>
+    <button type="button" tabindex="-1" class="search-close-button" aria-hidden="true">
+      <i class="ri-close-line ri-lg" title="Cancel search"></i>
+    </button>
+  </form>
+
+  <div class="autocomplete">
+    <div class="autocomplete-results">
+    </div>
+  </div>
+
+  <div class="sidebar-header">
+
+    <div class="sidebar-projectDetails">
+      <a href="Pento.html" class="sidebar-projectName" translate="no">
+pento
+      </a>
+      <div class="sidebar-projectVersion" translate="no">
+        v0.1.0
+      </div>
+    </div>
+    <ul id="sidebar-listNav" class="sidebar-listNav" role="tablist">
+      <li>
+        <button id="extras-list-tab-button" role="tab" data-type="extras" aria-controls="extras-tab-panel" aria-selected="true" tabindex="0">
+Pages
+        </button>
+      </li>
+
+        <li>
+          <button id="modules-list-tab-button" role="tab" data-type="modules" aria-controls="modules-tab-panel" aria-selected="false" tabindex="-1">
+            Modules
+          </button>
+        </li>
+
+
+    </ul>
+  </div>
+
+  <div id="extras-tab-panel" class="sidebar-tabpanel" role="tabpanel" aria-labelledby="extras-list-tab-button">
+    <ul id="extras-full-list" class="full-list"></ul>
+  </div>
+
+    <div id="modules-tab-panel" class="sidebar-tabpanel" role="tabpanel" aria-labelledby="modules-list-tab-button" hidden>
+      <ul id="modules-full-list" class="full-list"></ul>
+    </div>
+
+
+</nav>
+
+<main class="content">
+  <output role="status" id="toast"></output>
+  <div class="content-outer">
+    <div id="content" class="content-inner">
+
+<h1>
+<button class="icon-action display-settings">
+  <i class="ri-settings-3-line"></i>
+  <span class="sr-only">Settings</span>
+</button>
+
+
+  <span translate="no">PentoWeb.UserAuth</span> 
+  <small class="app-vsn" translate="no">(pento v0.1.0)</small>
+
+</h1>
+
+
+
+  <section id="summary" class="details-list">
+    <h1 class="section-heading">
+      <a class="hover-link" href="#summary">
+        <i class="ri-link-m" aria-hidden="true"></i>
+      </a>
+      <span class="text">Summary</span>
+    </h1>
+<div class="summary-functions summary">
+  <h2>
+    <a href="#functions">Functions</a>
+  </h2>
+
+    <div class="summary-row">
+      <div class="summary-signature">
+        <a href="#fetch_current_user/2" translate="no">fetch_current_user(conn, opts)</a>
+
+      </div>
+
+        <div class="summary-synopsis"><p>Authenticates the user by looking into the session
+and remember me token.</p></div>
+
+    </div>
+
+    <div class="summary-row">
+      <div class="summary-signature">
+        <a href="#fetch_current_user_from_header/2" translate="no">fetch_current_user_from_header(conn, opts)</a>
+
+      </div>
+
+    </div>
+
+    <div class="summary-row">
+      <div class="summary-signature">
+        <a href="#log_in_user/3" translate="no">log_in_user(conn, user, params \\ %{})</a>
+
+      </div>
+
+        <div class="summary-synopsis"><p>Logs the user in.</p></div>
+
+    </div>
+
+    <div class="summary-row">
+      <div class="summary-signature">
+        <a href="#log_out_user/1" translate="no">log_out_user(conn)</a>
+
+      </div>
+
+        <div class="summary-synopsis"><p>Logs the user out.</p></div>
+
+    </div>
+
+    <div class="summary-row">
+      <div class="summary-signature">
+        <a href="#on_mount/4" translate="no">on_mount(atom, params, session, socket)</a>
+
+      </div>
+
+        <div class="summary-synopsis"><p>Handles mounting and authenticating the current_user in LiveViews.</p></div>
+
+    </div>
+
+    <div class="summary-row">
+      <div class="summary-signature">
+        <a href="#redirect_if_user_is_authenticated/2" translate="no">redirect_if_user_is_authenticated(conn, opts)</a>
+
+      </div>
+
+        <div class="summary-synopsis"><p>Used for routes that require the user to not be authenticated.</p></div>
+
+    </div>
+
+    <div class="summary-row">
+      <div class="summary-signature">
+        <a href="#require_authenticated_user/2" translate="no">require_authenticated_user(conn, opts)</a>
+
+      </div>
+
+        <div class="summary-synopsis"><p>Used for routes that require the user to be authenticated.</p></div>
+
+    </div>
+
+    <div class="summary-row">
+      <div class="summary-signature">
+        <a href="#require_authenticated_user_json/2" translate="no">require_authenticated_user_json(conn, _)</a>
+
+      </div>
+
+    </div>
+
+</div>
+
+  </section>
+
+
+  <section id="functions" class="details-list">
+    <h1 class="section-heading">
+      <a class="hover-link" href="#functions">
+        <i class="ri-link-m" aria-hidden="true"></i>
+      </a>
+      <span class="text">Functions</span>
+    </h1>
+    <div class="functions-list">
+<section class="detail" id="fetch_current_user/2">
+
+  <div class="detail-header">
+    <a href="#fetch_current_user/2" class="detail-link" title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">fetch_current_user(conn, opts)</h1>
+
+
+  </div>
+
+  <section class="docstring">
+
+<p>Authenticates the user by looking into the session
+and remember me token.</p>
+  </section>
+</section>
+<section class="detail" id="fetch_current_user_from_header/2">
+
+  <div class="detail-header">
+    <a href="#fetch_current_user_from_header/2" class="detail-link" title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">fetch_current_user_from_header(conn, opts)</h1>
+
+
+  </div>
+
+  <section class="docstring">
+
+
+  </section>
+</section>
+<section class="detail" id="log_in_user/3">
+
+    <span id="log_in_user/2"></span>
+
+  <div class="detail-header">
+    <a href="#log_in_user/3" class="detail-link" title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">log_in_user(conn, user, params \\ %{})</h1>
+
+
+  </div>
+
+  <section class="docstring">
+
+<p>Logs the user in.</p><p>It renews the session ID and clears the whole session
+to avoid fixation attacks. See the renew_session
+function to customize this behaviour.</p><p>It also sets a <code class="inline">:live_socket_id</code> key in the session,
+so LiveView sessions are identified and automatically
+disconnected on log out. The line can be safely removed
+if you are not using LiveView.</p>
+  </section>
+</section>
+<section class="detail" id="log_out_user/1">
+
+  <div class="detail-header">
+    <a href="#log_out_user/1" class="detail-link" title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">log_out_user(conn)</h1>
+
+
+  </div>
+
+  <section class="docstring">
+
+<p>Logs the user out.</p><p>It clears all session data for safety. See renew_session.</p>
+  </section>
+</section>
+<section class="detail" id="on_mount/4">
+
+  <div class="detail-header">
+    <a href="#on_mount/4" class="detail-link" title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">on_mount(atom, params, session, socket)</h1>
+
+
+  </div>
+
+  <section class="docstring">
+
+<p>Handles mounting and authenticating the current_user in LiveViews.</p><h2 id="on_mount/4-on_mount-arguments" class="section-heading">
+  <a href="#on_mount/4-on_mount-arguments" class="hover-link">
+    <i class="ri-link-m" aria-hidden="true"></i>
+  </a>
+  <span class="text"><code class="inline">on_mount</code> arguments</span>
+</h2>
+<ul><li><p><code class="inline">:mount_current_user</code> - Assigns current_user
+to socket assigns based on user_token, or nil if
+there's no user_token or no matching user.</p></li><li><p><code class="inline">:ensure_authenticated</code> - Authenticates the user from the session,
+and assigns the current_user to socket assigns based
+on user_token.
+Redirects to login page if there's no logged user.</p></li><li><p><code class="inline">:redirect_if_user_is_authenticated</code> - Authenticates the user from the session.
+Redirects to signed_in_path if there's a logged user.</p></li></ul><h2 id="on_mount/4-examples" class="section-heading">
+  <a href="#on_mount/4-examples" class="hover-link">
+    <i class="ri-link-m" aria-hidden="true"></i>
+  </a>
+  <span class="text">Examples</span>
+</h2>
+<p>Use the <code class="inline">on_mount</code> lifecycle macro in LiveViews to mount or authenticate
+the current_user:</p><pre><code class="makeup elixir" translate="no"><span class="kd">defmodule</span><span class="w"> </span><span class="nc">PentoWeb.PageLive</span><span class="w"> </span><span class="k" data-group-id="8927294532-1">do</span><span class="w">
+  </span><span class="kn">use</span><span class="w"> </span><span class="nc">PentoWeb</span><span class="p">,</span><span class="w"> </span><span class="ss">:live_view</span><span class="w">
+
+  </span><span class="n">on_mount</span><span class="w"> </span><span class="p" data-group-id="8927294532-2">{</span><span class="nc">PentoWeb.UserAuth</span><span class="p">,</span><span class="w"> </span><span class="ss">:mount_current_user</span><span class="p" data-group-id="8927294532-2">}</span><span class="w">
+  </span><span class="n">...</span><span class="w">
+</span><span class="k" data-group-id="8927294532-1">end</span></code></pre><p>Or use the <code class="inline">live_session</code> of your router to invoke the on_mount callback:</p><pre><code class="makeup elixir" translate="no"><span class="n">live_session</span><span class="w"> </span><span class="ss">:authenticated</span><span class="p">,</span><span class="w"> </span><span class="ss">on_mount</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="2286007007-1">[</span><span class="p" data-group-id="2286007007-2">{</span><span class="nc">PentoWeb.UserAuth</span><span class="p">,</span><span class="w"> </span><span class="ss">:ensure_authenticated</span><span class="p" data-group-id="2286007007-2">}</span><span class="p" data-group-id="2286007007-1">]</span><span class="w"> </span><span class="k" data-group-id="2286007007-3">do</span><span class="w">
+  </span><span class="n">live</span><span class="w"> </span><span class="s">&quot;/profile&quot;</span><span class="p">,</span><span class="w"> </span><span class="nc">ProfileLive</span><span class="p">,</span><span class="w"> </span><span class="ss">:index</span><span class="w">
+</span><span class="k" data-group-id="2286007007-3">end</span></code></pre>
+  </section>
+</section>
+<section class="detail" id="redirect_if_user_is_authenticated/2">
+
+  <div class="detail-header">
+    <a href="#redirect_if_user_is_authenticated/2" class="detail-link" title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">redirect_if_user_is_authenticated(conn, opts)</h1>
+
+
+  </div>
+
+  <section class="docstring">
+
+<p>Used for routes that require the user to not be authenticated.</p>
+  </section>
+</section>
+<section class="detail" id="require_authenticated_user/2">
+
+  <div class="detail-header">
+    <a href="#require_authenticated_user/2" class="detail-link" title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">require_authenticated_user(conn, opts)</h1>
+
+
+  </div>
+
+  <section class="docstring">
+
+<p>Used for routes that require the user to be authenticated.</p><p>If you want to enforce the user email is confirmed before
+they use the application at all, here would be a good place.</p>
+  </section>
+</section>
+<section class="detail" id="require_authenticated_user_json/2">
+
+  <div class="detail-header">
+    <a href="#require_authenticated_user_json/2" class="detail-link" title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">require_authenticated_user_json(conn, _)</h1>
+
+
+  </div>
+
+  <section class="docstring">
+
+
+  </section>
+</section>
+
+    </div>
+  </section>
+
+      <footer class="footer">
+        <p>
+
+          <span class="line">
+            <button class="a-main footer-button display-quick-switch" title="Search HexDocs packages">
+              Search HexDocs
+            </button>
+
+          </span>
+        </p>
+
+        <p class="built-using">
+          Built using
+          <a href="https://github.com/elixir-lang/ex_doc" title="ExDoc" target="_blank" rel="help noopener" translate="no">ExDoc</a> (v0.30.9) for the
+
+            <a href="https://elixir-lang.org" title="Elixir" target="_blank" translate="no">Elixir programming language</a>
+
+        </p>
+      </footer>
+    </div>
+  </div>
+</main>
+</div>
+
+
+  </body>
+</html>

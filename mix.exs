@@ -100,7 +100,6 @@ defmodule Pento.MixProject do
   end
 
   defp groups_for_modules do
-    {list, _} = Code.eval_file("boundary.exs")
-    list
+    []
   end
 end

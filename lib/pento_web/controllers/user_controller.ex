@@ -23,8 +23,8 @@ defmodule PentoWeb.UserController do
   operation :index,
     summary: "User list",
     parameters: [
-      cursor: [in: :query, schema: Cursor],
-      limit: [in: :query, schema: PageSize]
+      cursor: [in: :query, schema: Cursor, description: "base encoded cursor"],
+      limit: [in: :query, schema: PageSize, description: "per page"]
     ],
     responses: [
       ok: {"User list response", "application/json", UserListResponse}

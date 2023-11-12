@@ -3,10 +3,12 @@ defmodule PentoWeb.Schema.Common do
     use OpenApiSpex.Schemax
     alias OpenApiSpex.Cast
 
+    @schema_type :string
     schema "Cursor" do
       description "Base64 encoded Cursor for pagination"
       format :byte
       default nil
+      example "Y3Vyc29yOjE="
       validate __MODULE__
     end
 

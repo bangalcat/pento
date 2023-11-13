@@ -101,9 +101,10 @@ defmodule PentoWeb.Router do
 
   scope "/api", PentoWeb do
     pipe_through [:api]
-    # pipe_through [:api, :require_authenticated_user_json]
 
     resources "/users", UserController, except: [:new, :edit]
+
+    pipe_through [:require_authenticated_user_json]
     resources "/products", ProductController, except: [:new, :edit]
 
     get "/users/:user_id/demographic", DemographicController, :show

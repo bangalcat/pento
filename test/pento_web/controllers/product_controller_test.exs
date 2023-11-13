@@ -27,6 +27,8 @@ defmodule PentoWeb.ProductControllerTest do
     {:ok, conn: put_req_header(conn, "accept", "application/json")}
   end
 
+  setup [:register_and_log_in_user, :setup_auth]
+
   describe "index" do
     setup [:create_product]
 
@@ -131,5 +133,10 @@ defmodule PentoWeb.ProductControllerTest do
   defp setup_category(_) do
     category = category_fixture(%{title: "RPG"})
     %{category: category}
+  end
+
+  def setup_auth(%{current_user: user, conn: conn}) do
+    conn = put_req_header(conn, "authorization", "Bearer user:#{user.id}")
+    %{conn: conn}
   end
 end

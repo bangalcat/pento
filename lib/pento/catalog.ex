@@ -53,6 +53,12 @@ defmodule Pento.Catalog do
   defp last_cursor(list, key),
     do: List.last(list) |> Map.get(key) |> then(&"cursor:#{&1}") |> Base.encode64()
 
+  def list_products_by_pagination_with_user_ratings(user, cursor, limit) do
+    user
+    |> Product.Query.with_user_ratings()
+    |> list_products_by_pagination(cursor, limit)
+  end
+
   @doc """
   Gets a single product.
 

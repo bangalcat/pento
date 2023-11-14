@@ -65,7 +65,8 @@ defmodule PentoWeb.ProductControllerTest do
                "name" => "some name",
                "sku" => 42,
                "unit_price" => 120.5,
-               "categories" => [cat.title]
+               "categories" => [cat.title],
+               "ratings" => nil
              }
     end
 

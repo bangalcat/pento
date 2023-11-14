@@ -23,11 +23,19 @@ defmodule PentoWeb.ProductJSON do
       unit_price: product.unit_price,
       sku: product.sku,
       image_upload: product.image_upload,
-      categories: categories(product)
+      categories: categories(product),
+      ratings: ratings(product)
     }
   end
 
   defp categories(%Product{} = product) do
     for cat <- product.categories, do: cat.title
+  end
+
+  def ratings(%Product{} = product) do
+    case product.ratings do
+      ratings when is_list(ratings) -> ratings |> Enum.map(& &1.stars)
+      _ -> nil
+    end
   end
 end
